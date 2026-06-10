@@ -1,0 +1,101 @@
+---
+title: "At04"
+author: "Geisielen Gomes"
+date: "2026-06-10"
+output: html_document
+---
+
+```{r include=FALSE}
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+```
+
+```{r}
+valores_p <- c(0.01, 0.05, 0.1, 0.2, 0.5, 0.8, 0.95, 0.99)
+tamanhos_n <- c(10, 30, 50, 100, 500)
+z <- 1.96
+m <- 10000
+resultados <- data.frame()
+```
+
+```{r}
+for (n in tamanhos_n) {
+  for (p in valores_p) {
+    
+  
+    X <- rbinom(n = m, size = n, prob = p)
+    p_hat <- X / n
+    #a
+    se_wald <- sqrt(p_hat * (1 - p_hat) / n)
+    ic_w_inf <- pmax(0, p_hat - z * se_wald) 
+    ic_w_sup <- pmin(1, p_hat + z * se_wald) 
+    # b
+    
+    termo_arc <- asin(sqrt(p_hat))
+    margem_arc <- z / (2 * sqrt(n))
+    
+    
+    lim_inf_arc <- pmax(0, pmin(pi/2, termo_arc - margem_arc))
+    lim_sup_arc <- pmax(0, pmin(pi/2, termo_arc + margem_arc))
+    
+    ic_arc_inf <- sin(lim_inf_arc)^2
+    ic_arc_sup <- sin(lim_sup_arc)^2
+    
+    #(c)
+    ic_cons_inf <- pmax(0, p_hat - z / (2 * sqrt(n)))
+    ic_cons_sup <- pmin(1, p_hat + z / (2 * sqrt(n)))
+    
+    
+    cob_w   <- mean(p >= ic_w_inf & p <= ic_w_sup)
+    cob_arc <- mean(p >= ic_arc_inf & p <= ic_arc_sup)
+    cob_c   <- mean(p >= ic_cons_inf & p <= ic_cons_sup)
+    
+  
+    larg_w   <- mean(ic_w_sup - ic_w_inf)
+    larg_arc <- mean(ic_arc_sup - ic_arc_inf)
+    larg_c   <- mean(ic_cons_sup - ic_cons_inf)
+    
+    
+    df_cenario <- data.frame(
+      n = n, p = p,
+      Metodo = c("Wald", "Arcseno", "Conservador"),
+      Cobertura = c(cob_w, cob_arc, cob_c),
+      Largura_Media = c(larg_w, larg_arc, larg_c)
+    )
+    
+    resultados <- rbind(resultados, df_cenario)
+  }
+}
+
+```
+
+# Gráfico de cobertura 
+
+```{r}
+ggplot(resultados, aes(x = as.factor(p), y = Cobertura, color = Metodo, group = Metodo)) +
+  geom_line(size = 1) +
+  geom_point(size = 2) +
+  geom_hline(yintercept = 0.95, linetype = "dashed", color = "red") +
+  facet_wrap(~ n, labeller = label_both, scales = "free_y") +
+  labs(title = "Cobertura Empírica por Tamanho Amostral (n) e Proporção (p)",
+       x = "Proporção Populacional (p)", y = "Cobertura") +
+  theme_minimal()
+```
+
+Quando o $n$ é pequeno ou o $p$ é muito perto de 0 ou 1 , a cobertura do método de Wald não fica boa . O Arcseno para n grande ou pequeno é sempre o mais próximo de 95% de ccobertura . Já o método conservador chega nos casos da amostra com tamanho pequeno a ter cobertura total e quando aumentamos o tamanho da amostra vamos ter que ele ainda tem mais cobertura do que os outros métodos.
+
+# Grafico da largura média 
+
+```{r}
+ggplot(resultados, aes(x = as.factor(p), y = Largura_Media, color = Metodo, group = Metodo)) +
+  geom_line(size = 1) +
+  geom_point(size = 2) +
+  facet_wrap(~ n, labeller = label_both) +
+  labs(title = "Largura Média dos ICs por Tamanho Amostral (n) e Proporção (p)",
+       x = "Proporção Populacional (p)", y = "Largura Média") +
+  theme_minimal()
+
+```
+
+Quando olhamos para amplitude média dos intervalos de confiança nós temos que para tamanhos de amostras grandes os metodos tem uma aplitude parecida . Para tamanhos de amostras pequenos incialmente o método de wald tem um melhor desempenho que os outros e logo após vemos o Arcseno ter o melhor desempenho mas o método conservador tem sempre uma amplitude maior do que os outros dois métodos .
