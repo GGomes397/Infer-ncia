@@ -1,0 +1,98 @@
+---
+title: "Comparando Estimadores da Bernoulli"
+format:
+  html:
+    embed-resources: true
+---
+
+Nas ultimas aulas de Inferência paramétrica , nós temos estudando sobre como escolher o melhor estimador para o parâmetro . Em Inferência paramétrica 1 , nós aprendemos a selecionar o estimador pelo método dos momentos, mínimos quadrados e maxíma-verossimilhança na maioria dos momentos nós escolhemos o estimador de maxíma-verossimilhança porque suas propriedades nos dão muitas propriedades úteis.
+
+Na disciplina atual fomos questionadas se estimadores que encontramos pelo diferentes métodos como devemos avaliar qual é o melhor para os nosso problema podendo ser um problema de acurácia , precisão ou um problema onde queremos as duas coisas .
+
+A primeira discussão que a professora nos trouxe um exemplo onde nós tinhamos uma X\~Binomial(n, $\theta$ ) e os estimadores que ela nos deu foram
+
+$\hat{\theta_{1}}=\bar{X}$ e $\hat{\theta_{2}}=\frac{X+\frac{\sqrt{n}}{2}}{n+\sqrt{n}}$
+
+e calculamos o resultados de forma teórica . Agora faremos de forma empírica. Primeiramente nòs defnimos o intervalo para $\theta$ e criamos intervalo para mostrar como a amostra se comporta para diferentes valores de N :
+
+```{r}
+# Sequência de theta
+theta <- seq(0, 1, length.out = 500)
+
+# Valores de n que você quer comparar
+n_vals <- c(5, 9, 20, 50, 100)
+```
+
+Agora vamos como fica os gráficos para diferentes valores o teste que vamos fazer aqui é eqm :
+
+```{r}
+par(mfrow = c(2, 3))  # vários gráficos
+
+for (n in n_vals) {
+  
+  # EQM do estimador 1
+  eqm1 <- theta * (1 - theta) / n
+  
+  # EQM do estimador 2 (constante em theta)
+  eqm2 <- rep(n / (4 * (sqrt(n) + n)^2), length(theta))
+  
+  # Plot
+  plot(theta, eqm1, type = "l", lwd = 2,
+       ylim = c(0, max(eqm1, eqm2)),
+       main = bquote(
+         "n =" ~ .(n) ~ " | Preta:" ~ hat(theta)[1] ~ " | Vermelha:" ~ hat(theta)[2]),
+       xlab = expression(theta),
+       ylab = "EQM")
+  
+  # Linha do segundo estimador
+  lines(theta, eqm2, col = "red", lwd = 2, lty = 2)
+  
+  # Legenda
+   legend("bottom", legend = c(expression(hat(theta)[1]),
+                           expression(hat(theta)[2])),
+       col = c("black", "red"),
+       lwd = 2, lty = c(1,2), bty = "n")
+  
+  legend("topright",
+        legend = c(expression(hat(theta)[1]),
+                    expression(hat(theta)[2])),
+        col = c("black", "red"),
+       lwd = 2, lty = c(1,2), bty = "n", cex = 0.8)
+}
+```
+
+Vamos fazer isso num mesmo gráfico
+
+```{r}
+theta <- seq(0, 1, length.out = 500)
+n_vals <- c(9, 20, 50, 100)
+
+plot(NULL, xlim = c(0,1), ylim = c(0,0.08),
+     xlab = expression(theta), ylab = "EQM",
+     main = "Comparação dos EQMs")
+
+colors <- c("black", "blue", "darkgreen", "purple")
+
+for (i in seq_along(n_vals)) {
+  n <- n_vals[i]
+  
+  eqm1 <- theta * (1 - theta) / n
+  eqm2 <- 1 / (4 * (sqrt(n) + 1)^2)
+  
+  lines(theta, eqm1, col = colors[i], lwd = 2)
+  abline(h = eqm2, col = colors[i], lty = 2)
+}
+
+legend("topleft",
+       legend = paste("n =", n_vals),
+       col = colors, lwd = 2, bty = "n", cex=0.55)
+legend("topright",
+       legend = c(expression(hat(theta)[1]),
+                  expression(hat(theta)[2])),
+       lty = c(1, 2),
+       col = "black",
+       bty = "n",
+       cex = 0.7)
+```
+
+O Eqm nos mostrou que assintóticamente os dois estimadores são quase a mesma coisa mas para n\<50 $\hat{\theta_{2}}$ é a melhor escolha porque o eqm ele é menor do que o de $\hat{\theta_{1}}$.

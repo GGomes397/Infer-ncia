@@ -1,0 +1,230 @@
+---
+title: "Computacional 3"
+author: "Geisielen Gomes"
+date: "2026-06-09"
+output: html_document
+---
+
+Dado a população X \~ N(70,5) retiraremos uma amostras de tamanho 3 , queremos construir um intervalo de confiança para $\mu$ com a confiança de 95% .Usaremos o método da quantidade pivotal para construir esses intervalos .
+
+```{r}
+mu <- 70
+sigma <- 5
+n <- 3
+set.seed(123)
+amostra <- rnorm(n,mean = mu,sd=sqrt(sigma))
+```
+
+Para construirmos o intervalo de confiança nós precisamos de $\bar{X}$ e $\sigma^2$ então vamos calcular
+
+```{r}
+#media amostral 
+xbarra <- mean(amostra)
+#variancia amostral 
+var_amostral <-sum(((amostra-xbarra)**2))/(n-1)
+
+```
+
+### a)
+
+Pelos calculos feitos em aulas sabemos que o intervalo de confiança para $\mu$ com $\sigma^2$ conhecido vai ser
+
+$$(\bar{X}-z_{\alpha/2}\frac{\sigma}{\sqrt{n}},\bar{X}-z_{\alpha/2}\frac{\sigma}{\sqrt{n}})$$
+
+onde $\alpha$=1-$\gamma$ , onde $\gamma$=0,95 o nivel de confiança .
+
+```{r}
+#a
+z <- qnorm(0.975)
+ic_a <- c(xbarra-z*sigma / sqrt(n),
+          xbarra+z*sigma / sqrt(n))
+cat("a) IC 95% (sigma conhecido):", ic_a, "\n")
+```
+
+### b)
+
+Pelos calculos feitos em aulas sabemos que o intervalo de confiança para $\mu$ com $\sigma^2$ desconhecido vai ser
+
+$$(\bar{X}-t_{\alpha/2}\frac{S}{\sqrt{n}},\bar{X}-t_{\alpha/2}\frac{S}{\sqrt{n}})$$
+
+```{r}
+#b
+t <- qt(0.975, df = n - 1)
+s <- sd(amostra)
+ic_b <- c(xbarra-t*s / sqrt(n),
+          xbarra+t*s/ sqrt(n))
+cat("a) IC 95% (sigma desconhecido):", ic_b, "\n")
+```
+
+Agora vamos fazer essa simulação 100 vezes e vamos ver a proporção de quantas vezes o intervalo contém o valor real
+
+```{r}
+contem_a <- logical(100)  
+contem_b <- logical(100)
+amplitude_a <- numeric(100)
+amplitude_b <- numeric(100)
+
+set.seed(123)
+
+for (i in 1:100) {
+  
+  amostra <- rnorm(n, mean = mu, sd = sigma)
+  xbarra <- mean(amostra)
+  
+  # a) IC com sigma conhecido
+  z <- qnorm(0.975)
+  ic_a_inf <- xbarra - z * sigma / sqrt(n)
+  ic_a_sup <- xbarra + z * sigma / sqrt(n)
+  contem_a[i] <- (ic_a_inf <= mu & mu <= ic_a_sup)
+  amplitude_a[i]<- ic_a_sup-ic_a_inf
+  
+  # b) IC com sigma desconhecido (usando t)
+  t <- qt(0.975, df = n - 1)
+  s <- sd(amostra)
+ 
+  ic_b_inf <- xbarra - t * s / sqrt(n)
+  ic_b_sup <- xbarra + t * s / sqrt(n)
+  contem_b[i] <- (ic_b_inf <= mu & mu <= ic_b_sup)
+  amplitude_b[i]<- ic_b_sup-ic_b_inf
+}
+
+prop_conhecido <- sum(contem_a) / 100
+prop_desconhecido <- sum(contem_b) / 100
+
+lm_a <- mean(amplitude_a)
+lm_b <- mean(amplitude_b)
+
+cobertura_a <- mean(contem_a)
+cobertura_b <- mean(contem_b)
+
+vies_a <- cobertura_a - 0.95
+vies_b <- cobertura_b  - 0.95
+
+cat("a) Sigma conhecido:\n")
+cat("   Proporção de ICs que contêm μ:", prop_conhecido * 100, "%\n")
+cat("   Largura média dos ICs:", round(lm_a, 4), "\n")
+cat("   viés:", vies_a,"\n")
+cat("b) Sigma desconhecido:\n")
+cat("   Proporção de ICs que contêm μ:", prop_desconhecido * 100, "%\n")
+cat("   Largura média dos ICs:", round(lm_b, 4), "\n")
+cat("   viés:", vies_b)
+
+
+```
+
+Para fazer o gráfico de comparação das curvas de corbetura eu vou compara com diferentes tamanhos de amostras e ver como fica
+
+```{r}
+library(ggplot2)
+tamanhos_n <- c(5, 10, 20, 30, 50, 100)
+
+
+resultados <- data.frame(
+  n = numeric(),
+  cobertura_a = numeric(),
+  cobertura_b = numeric(),
+  lm_a = numeric(),
+  lm_b = numeric()
+)
+
+set.seed(123)
+
+for (n in tamanhos_n) {
+  
+  # Preparando os vetores para as 100 simulações do 'n' atual
+  contem_a <- logical(100)  
+  contem_b <- logical(100)
+  amplitude_a <- numeric(100)
+  amplitude_b <- numeric(100)
+  
+  # Sua rotina de simulação original
+  for (i in 1:100) {
+    
+    amostra <- rnorm(n, mean = mu, sd = sigma)
+    xbarra <- mean(amostra)
+    
+    # a)
+    z <- qnorm(0.975)
+    ic_a_inf <- xbarra - z * sigma / sqrt(n)
+    ic_a_sup <- xbarra + z * sigma / sqrt(n)
+    contem_a[i] <- (ic_a_inf <= mu & mu <= ic_a_sup)
+    amplitude_a[i] <- ic_a_sup - ic_a_inf
+    
+    # b)
+    t <- qt(0.975, df = n - 1)
+    s <- sd(amostra)
+    
+    ic_b_inf <- xbarra - t * s / sqrt(n)
+    ic_b_sup <- xbarra + t * s / sqrt(n)
+    contem_b[i] <- (ic_b_inf <= mu & mu <= ic_b_sup)
+    amplitude_b[i] <- ic_b_sup - ic_b_inf
+  }
+  
+
+  cobertura_a <- mean(contem_a)
+  cobertura_b <- mean(contem_b)
+  lm_a <- mean(amplitude_a)
+  lm_b <- mean(amplitude_b)
+  
+  
+  nova_linha <- data.frame(
+    n = n,
+    cobertura_a = cobertura_a,
+    cobertura_b = cobertura_b,
+    lm_a = lm_a,
+    lm_b = lm_b
+  )
+  
+  
+  resultados <- rbind(resultados, nova_linha)
+}
+
+print(resultados)
+```
+
+Comparação gráfica . Gra
+
+```{r}
+ggplot(resultados, aes(x = n)) +
+  # Linha e pontos para Sigma Conhecido (a)
+  geom_line(aes(y = cobertura_a, color = "Sigma Conhecido (Z)"), linewidth = 1) +
+  geom_point(aes(y = cobertura_a, color = "Sigma Conhecido (Z)"), size = 2) +
+  
+  # Linha e pontos para Sigma Desconhecido (b)
+  geom_line(aes(y = cobertura_b, color = "Sigma Desconhecido (T)"), linewidth = 1) +
+  geom_point(aes(y = cobertura_b, color = "Sigma Desconhecido (T)"), size = 2) +
+  
+  # Linha de referência do nível teórico de 95%
+  geom_hline(yintercept = 0.95, linetype = "dashed", color = "black") +
+  
+  labs(title = "Cobertura Empírica vs Tamanho da Amostra",
+       x = "Tamanho da Amostra (n)",
+       y = "Cobertura Empírica",
+       color = "Situação") +
+  theme_minimal()
+
+```
+
+Note as coberturas empíricas estão ao redor de 0.95 tanto para $\sigma$ conhecido ou não, na média, os dois métodos são válidos e conseguem "capturar" o verdadeiro de $\mu$
+
+Gráfico 2: Largura Média
+
+```{r}
+
+ggplot(resultados, aes(x = n)) +
+
+  geom_line(aes(y = lm_a, color = "Sigma Conhecido (Z)"), linewidth = 1) +
+  geom_point(aes(y = lm_a, color = "Sigma Conhecido (Z)"), size = 2) +
+  
+  # Linha e pontos para Sigma Desconhecido (b)
+  geom_line(aes(y = lm_b, color = "Sigma Desconhecido (T)"), linewidth = 1) +
+  geom_point(aes(y = lm_b, color = "Sigma Desconhecido (T)"), size = 2) +
+  
+  labs(title = "Largura Média dos Intervalos vs Tamanho da Amostra",
+       x = "Tamanho da Amostra (n)",
+       y = "Largura Média",
+       color = "Situação") +
+  theme_minimal()
+```
+
+Quanto menor o tamanho da amostra maior é o valor da amplitude dos intervalos de confiança mas a medida que aumentamos o tamanho da nossa amostra nós diminuimos amplitude dos intervalos .

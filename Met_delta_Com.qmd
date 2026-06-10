@@ -1,0 +1,51 @@
+------------------------------------------------------------------------
+
+---
+title: "Método Delta"
+author: "Geisielen Gomes"
+format: 
+  pdf:
+    pdf-engine: pdflatex
+editor: visual
+---
+
+```{r}
+#| warning: false
+library(msm)
+library(tinytex)
+```
+
+Do teorema da distribuição assintótica nós sabemos que se $\hat{\theta}$ é um estimador para um dado $\theta$ de uma população $f(x|\theta)$ então $\sqrt{n}(\hat{\theta} - \theta)$ converge em distribuição para uma variável aleatória normal com média 0 e variância $\sigma^2=I_f^{-1}$. O método delta nos ajuda a descobrir a distribuição assintótica de $Y=g(\theta)$ onde vamos ter que $$\sqrt{n}(\hat{g(\theta)}-g(\theta))\xrightarrow{d}N(0,(g'(\theta))^{2}\sigma^2)$$
+
+Isso para o caso uniparamétrico , para o multi paramétrico $$\sqrt{n}(\hat{g(\theta)}-g(\theta))\xrightarrow{d}N(0, \nabla{g(\theta )}^T\sum \nabla{g(\theta )})$$
+
+onde $\theta=(\theta_1,\theta_2,...,\theta_n)$ e $\Sigma$ é a matriz de covariâncias de $\theta$.
+
+### Exemplo 1
+
+Usando a teoria nesse caso onde $\hat{\theta}=2$ e $\sigma^2=0.01$ fazendo os calculos manualmente teriamos $$\text{Var}(g'(\theta))\approx (g'(\theta))^{2}\text{Var}(\theta )$$
+
+$$\text{Var}(g'(\theta))\approx (2\theta)^2 *0.01$$ $$\text{Var}(g'(\theta))\approx (2*2)^{2}* 0.01$$
+
+$$\text{Var}(g'(\theta))\approx 0.16$$
+
+```{r}
+theta_hat <- 2
+var_theta <- 0.01
+deltamethod(~x1^2, mean = theta_hat, cov = var_theta, ses = FALSE)
+```
+
+### Exemplo 2
+
+Nós temos que $g(\theta)=\frac{\theta_1}{\theta_2}$ $\theta_1=2$ e $\theta_2=4$
+
+$$\Sigma= \begin{bmatrix}
+0.01 & 0.002 \\
+ 0.002& 0.04 \\
+\end{bmatrix} $$ Nesse caso nós queremos o desvio padrão
+
+```{r}
+mean_vec <- c(2, 4)
+cov_matrix <- matrix(c(0.01, 0.002, 0.002, 0.04), nrow = 2)
+deltamethod(~x1/x2, mean_vec, cov_matrix)
+```
