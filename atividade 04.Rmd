@@ -70,7 +70,7 @@ for (n in tamanhos_n) {
 
 ```
 
-# Gráfico de cobertura 
+# Gráfico de cobertura
 
 ```{r}
 ggplot(resultados, aes(x = as.factor(p), y = Cobertura, color = Metodo, group = Metodo)) +
@@ -85,7 +85,7 @@ ggplot(resultados, aes(x = as.factor(p), y = Cobertura, color = Metodo, group = 
 
 Quando o $n$ é pequeno ou o $p$ é muito perto de 0 ou 1 , a cobertura do método de Wald não fica boa . O Arcseno para n grande ou pequeno é sempre o mais próximo de 95% de ccobertura . Já o método conservador chega nos casos da amostra com tamanho pequeno a ter cobertura total e quando aumentamos o tamanho da amostra vamos ter que ele ainda tem mais cobertura do que os outros métodos.
 
-# Grafico da largura média 
+# Grafico da largura média
 
 ```{r}
 ggplot(resultados, aes(x = as.factor(p), y = Largura_Media, color = Metodo, group = Metodo)) +

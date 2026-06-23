@@ -1,0 +1,107 @@
+---
+title: "Atividade 04"
+format: html
+editor: visual
+---
+
+Nessa atividade foi nos dado o seguinte problema : Um hospital universitário deseja estudar a demanda noturna em seu pronto atendimento. Seja $X_{i}$ o número de pacientes que chegam ao pronto atendimento entre 00h e 1h na i- ésima noite. Suponha que
+
+$$X_{1},\dots,X_{n}$$
+
+iid∼ Poisson($\lambda$),
+
+onde $\lambda$ representa o número médio o de chegadas por hora nesse período. O hospital coletou dados durante n = 20 noites e obteve os seguintes n ́umeros de pacientes:
+
+```         
+3, 2, 4, 1, 5, 3, 2, 4, 6, 3, 2, 1, 5, 4, 3, 2, 4, 3, 1, 2
+```
+
+a)  Estime $\lambda$ pelo método da máxima verossimilhança.
+
+Sabemos que a função da amostra aleatória idd de uma Poisson é dada por $f(x_1,\dots,x_n|\lambda)=\prod_{i=1}^{n}\frac{\lambda^x e^{-\lambda}}{x_i!}\\$ $=\prod_{i=1}^{n}\frac{e^{ln(\lambda^x)} e^{-\lambda}}{x_i!}\\$
+
+$=\prod_{i=1}^{n}\frac{e^{xln(\lambda)} e^{-\lambda}}{x_i!}$
+
+$=\prod_{i=1}^{n}\frac{e^{xln(\lambda)-\lambda}}{x_i!}$
+
+$=\frac{e^{\sum_{i=1}^{n}(x_{i}ln(\lambda)-\lambda)}}{(x_i!)^n}$
+
+$=\frac{e^{\sum_{i=1}^{n}x_{i}ln(\lambda)-n\lambda}}{(x_i!)^n}\\$
+
+Fazendo os calculos nós chegamos que o emv de $\lambda$ é
+
+$$EMV_{\lambda}=\bar{X}=\sum \frac{x_i}{n}$$
+
+```{r}
+n <- 20
+x<-c(3, 2, 4, 1, 5, 3, 2, 4, 6, 3, 2, 1, 5, 4, 3, 2, 4, 3, 1, 2) 
+xbarra <- sum(x)/n
+cat("Estimativa para a média amostral é de ",xbarra)
+```
+
+b)  Construa um intervalo de confiança assintótico de 95% para λ usando a normalidade assintótica do EMV.
+
+Usando a normalidade assintótica do EMV temos que $$\bar{X}~N(\lambda,\frac{\lambda}{n})$$
+
+o intervalo de confiança vai ser construido da seguinte forma
+
+```{r}
+alpha <- 0.95
+zb <-qnorm(0.975,0,1) 
+ic_b <-c(xbarra-zb*sqrt(xbarra/n),xbarra+zb*sqrt(xbarra/n))
+cat("O intervalo de confiança assintótico de 95% ",ic_b)
+```
+
+c)  Construa um intervalo de confiança de 95% para λ utilizando a transformação estabilizadora de variância
+
+Para construir este intervalo, precisamos utilizar uma transformação $g(\lambda)$ que estabilize a variância. Para a distribuição Poisson, sabemos que a transformação raiz quadrada $g(X) = \sqrt{X}$ cumpre esse papel.
+
+Pelo Método Delta, se aplicarmos essa transformação na média amostral, obtemos uma variância assintótica que não depende mais de $\lambda$: $$\sqrt{\bar{X}} \sim N\left(\sqrt{\lambda}, \frac{1}{4n}\right)$$
+
+Assim, o intervalo de confiança de 95% para $\sqrt{\lambda}$ é dado por: $$\sqrt{\bar{X}} \pm z_{\alpha/2} \frac{1}{2\sqrt{n}}$$
+
+Para encontrar o intervalo para $\lambda$, basta elevarmos os limites obtidos ao quadrado:
+
+```{r}
+# IC com transformação estabilizadora de variância (VST)
+limite_inf_vst <- (sqrt(xbarra) - zb/(2*sqrt(n)))^2
+limite_sup_vst <- (sqrt(xbarra) + zb/(2*sqrt(n)))^2
+ic_c <- c(limite_inf_vst, limite_sup_vst)
+
+cat("O intervalo com estabilização de variância de 95% para λ é:", ic_c)
+
+```
+
+d)  Construa um intervalo de confiança exato de 95% para $\lambda$ usando a estatística suficiente.
+
+A estatística suficiente para $\lambda$ é a soma das observações $Y = \sum_{i=1}^{n} X_i$, que possui distribuição Poisson com parâmetro $n\lambda$.
+
+Podemos construir um intervalo de confiança exato explorando a relação bem conhecida entre a distribuição de Poisson e a distribuição Qui-quadrado ($\chi^2$). Para uma soma $y = \sum x_i$, os limites inferior e superior do intervalo de confiança exato de $100(1-\alpha)\%$ para $\lambda$ são:
+
+$$\left[ \frac{\chi^2_{\alpha/2, 2y}}{2n}, \frac{\chi^2_{1-\alpha/2, 2(y+1)}}{2n} \right]$$
+
+```{r}
+y <- sum(x) #
+alpha_nivel <- 0.05
+
+
+limite_inf_exato <- qchisq(alpha_nivel/2, 2*y) / (2*n)
+limite_sup_exato <- qchisq(1 - alpha_nivel/2, 2*(y+1)) / (2*n)
+ic_d <- c(limite_inf_exato, limite_sup_exato)
+
+cat("O intervalo de confiança exato de 95% para λ é:", ic_d)
+```
+
+e)  Compare os intervalos de confiança obtidos nos itens anteriores. Discuta as semelhanças e diferenças entre eles, considerando a amplitude, limites negativos e métodos.
+
+Vamos primeiro calcular as amplitudes de cada intervalo para facilitar a comparação:
+
+```{r}
+amplitude_b <- ic_b[2] - ic_b[1]
+amplitude_c <- ic_c[2] - ic_c[1]
+amplitude_d <- ic_d[2] - ic_d[1]
+
+cat("Amplitude do IC Assintótico Usual (b):", amplitude_b, "\n")
+cat("Amplitude do IC com VST (c):", amplitude_c, "\n")
+cat("Amplitude do IC Exato (d):", amplitude_d, "\n")
+```
