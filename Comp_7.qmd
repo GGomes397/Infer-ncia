@@ -1,0 +1,114 @@
+---
+title: "Comp_7"
+format: html
+---
+
+Nas ultimas aulas do curso nós temos aprendido as técnicas para construir um intervalo de confiança para os parâmetros de uma população . Só que em todos os casos em que trabalhamos nós partíamos da hipotese de populção normal ou utlizamos o Teorema Central do limite que nos ajudava supor normalidade mesmo em caso em que a população não fosse desde que o tamanho da amostra fosse grande o suficiente .
+
+## Mas o que ocorre se não temos uma amostra grande o suficiente e nem população normal como construímos o intervalo de confiança ?
+
+Nesse contexto nós trabalhos método Bootstrap , onde basicamente nós não vamos preocupar com a suposições de Normalidade vamos pegar uma amostra de uma população e vamos fazer reamostragem c vezes e montar um conjunto dessas amostras com mesmo tamanho da amostra original e vamos conseguir construir um intervalo de confiança para o parâmetro $\theta$ que desejamos fazer infêrencias e damos uma confiança $\gamma$ e $\alpha=1-\gamma$ e criamos o intervalo confiança da sequinte forma
+
+$$IC\left( \theta,100\gamma \%\right)=\left( Q_{\frac{\alpha}{2}},Q_{1-\frac{\alpha}{2}} \right)$$
+
+Onde $Q$ são os quantis da amostra .
+
+Seguindo o exemplo dado no vídeo a mudança que eu fiz foi escolher do mesmo conjunto de dados uma informação diferente vou escollher fazer as analises sobre a `Fertility`
+
+```{r}
+data(swiss)
+Fert <- swiss$Fertility
+tam<- length(Fert)
+n <- 1000
+resultados <- data.frame(
+  mediana = numeric(0),
+  q1 = numeric(0),
+  q3 = numeric(0)
+  
+)
+```
+
+### Fazendo a reamostra
+
+```{r}
+reamostra <- function(amos,t1,t2,resultados){
+  
+  q_1 <- numeric(t2)
+  q_3 <- numeric(t2)
+  md <- numeric(t2)
+  
+  
+  for(i in 1:t2){
+    amostra <- sample(x=amos,size = t1,replace = T)
+    md[i]<- quantile(amostra,0.5)
+    q_1[i] <- quantile(amostra,0.25)
+    q_3[i]<- quantile(amostra,0.75)
+    
+  }
+  
+  n_r <- data.frame(
+    mediana = md,
+    q1 = q_1,
+    q3 = q_3
+    
+  )
+  return(rbind(resultados, n_r))
+  
+  
+}
+resultados <- reamostra(Fert,tam,n,resultados)
+
+#ic
+gm <- 0.95#dando a confiança
+alpha <- 1-gm#nivel de signicância
+ic_md <- c(quantile(resultados$mediana,alpha/2),quantile(resultados$mediana,1-alpha/2))
+vies_md <- mean(resultados$mediana)-median(Fert)
+ic_q1 <- c(quantile(resultados$q1,alpha/2),quantile(resultados$q1,1-alpha/2))
+vies_q1 <- mean(resultados$q1)-quantile(Fert,0.25)
+ic_q3 <- c(quantile(resultados$q3,alpha/2),quantile(resultados$q3,1-alpha/2))
+vies_q3 <- mean(resultados$q3)-quantile(Fert,0.75)
+```
+
+### Analise dos resultados
+
+```{r}
+#| echo: false
+#| warning: false
+cat("--Mediana--\nViés:",vies_md,"\nVariância:",var(resultados$mediana),"\nIc com ",(100*gm),"% de confiança:\n")
+ic_md
+
+```
+
+Note que , apesar de termos um viés negativo nós temos que esse viés é um valor muito próximo de zero ,então não é uma coisa muito ruim .
+
+```{r}
+#| echo: false
+#| warning: false
+cat("--Q1--\nViés:",vies_q1,"\nVariância:",var(resultados$q1),"\nIc com ",(100*gm),"% de confiança:\n")
+ic_q1
+
+```
+
+O nosso viés nesse caso é muito próximo de 1 .
+
+```{r}
+#| echo: false
+#| warning: false
+cat("--Q3--\nViés:",vies_q3,"\nVariância:",var(resultados$q3),"\nIc com ",(100*gm),"% de confiança:\n")
+ic_q3
+```
+
+O nosso víes nesse caso é baixo mas quando olhamos para o viés de q1 nos questionamos se o vicio do bootstrap aumentaria ou diminuiria se nós aumentassemos o tamanho das nossas reamostragem então fizemos a mesma função mas apenas mudando o tamanho das rodadas de para reamostragem.
+
+```{r}
+#| echo: false
+#| warning: false
+r <- reamostra(Fert,tam,n*100,resultados)
+
+ic_q1 <- c(quantile(r$q1,alpha/2),quantile(r$q1,1-alpha/2))
+vies_q1 <- mean(r$q1)-quantile(Fert,0.25)
+cat("--Q3--\nN:",n*100,"\nViés:",vies_q1,"\nVariância:",var(r$q1),"\nIc com ",(100*gm),"% de confiança:\n")
+ic_q1
+```
+
+Nosso vicio não teve uma melhora o que mostra que o nosso bootstrap tem um vicio mesmo quando aumentamos a quantidade de simulações.

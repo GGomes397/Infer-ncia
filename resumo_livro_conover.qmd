@@ -1,0 +1,347 @@
+# Resumo do Capítulo 1: Teoria da Probabilidade (Conover, 3ª ed.)
+
+> **Fonte:** páginas 5–67 do livro (OCR do PDF escaneado). Conferi os valores numéricos em Python/scipy, mas **não executei o código em R**, porque o ambiente não tem R instalado. Os exercícios estão numerados como no scan, que pode estar errado em alguns casos. Por isso cito também o enunciado.
+
+## Ideia do capítulo
+
+O Conover monta aqui a "caixa de ferramentas" mínima de probabilidade para entender os testes dos capítulos seguintes. A ideia central é que **quase todo teste não paramétrico é uma conta de contagem**. Conta-se quantos resultados são possíveis, quantos são tão ou mais extremos que o observado, e divide-se um pelo outro. Por isso o capítulo vai de contar (1.1) a probabilidade (1.2), variáveis aleatórias (1.3), esperança e variância (1.4) e, por fim, aproximações pela normal e pelo qui-quadrado (1.5).
+
+## Resumo passo a passo
+
+### 1.1 Contagem
+
+- **Experimento** é um procedimento com regras definidas e resultado desconhecido. Cada repetição é uma **tentativa** (*trial*), e os resultados possíveis são **eventos**.
+- A moeda é o protótipo de qualquer experimento com dois resultados (cura/não cura, marca A/outras marcas).
+- Se cada tentativa tem $k$ resultados e há $n$ tentativas, o experimento todo tem $k^n$ resultados (**Regra 1**).
+- Arranjar $n$ objetos distintos em fila dá $n!$ maneiras, com $0! = 1$ (**Regra 2**).
+- Se há objetos idênticos, divide-se pelas permutações internas de cada grupo (**Regra 3**). Com dois grupos, isso dá o **coeficiente binomial**.
+- O coeficiente binomial também responde "de quantas formas escolho $k$ de $n$?". A expansão $(x+y)^n$ explica o nome.
+
+### 1.2 Probabilidade
+
+- Define-se o **espaço amostral** $S$, seus **pontos** e os **eventos** (conjuntos de pontos).
+- A probabilidade é uma função que atribui um número a cada evento (Definição 4: limite da frequência relativa).
+- O evento "A e B" é a **interseção** (Definição 6, $AB$), e "A ou B" é a união.
+- A **probabilidade condicional** redefine o espaço amostral para $B$.
+- **Independência** significa que saber de $B$ não altera a probabilidade de $A$. Vale também para experimentos inteiros (Definições 9–10).
+
+### 1.3 Variáveis aleatórias
+
+- Uma **variável aleatória** é uma função que leva pontos do espaço amostral a números reais.
+- A **função de probabilidade** $f(x)=P(X=x)$ e a **função de distribuição** $F(x)=P(X\le x)$ descrevem a variável.
+- Distribuições discretas centrais: **binomial**, **uniforme discreta** e **hipergeométrica**.
+- A distribuição **conjunta** e a **condicional** tratam de várias variáveis ao mesmo tempo. Independência de variáveis significa que a conjunta é o produto das marginais.
+
+### 1.4 Propriedades de variáveis aleatórias
+
+- **Quantis** (mediana, quartis, decis, percentis).
+- **Esperança** (média) e **variância**.
+- **Covariância** e **correlação**.
+- Resultados prontos para usar depois: média e variância da binomial (Teorema 4) e da **soma de** $n$ inteiros sorteados sem reposição (Teorema 5). Este último é a base dos testes de postos.
+
+### 1.5 Variáveis contínuas
+
+- A **normal** tem as quantidades tabeladas, e quantis de qualquer normal saem do quantil padrão.
+- O **Teorema Central do Limite** justifica aproximar somas por uma normal. Um caso importante é a binomial com $n$ grande.
+- A **qui-quadrado** é a soma de quadrados de normais padrão. Surge em vários testes dos capítulos 3 e 4.
+
+## Definições, teoremas e regras mais importantes
+
+### Contagem e probabilidade
+
+| Item | Enunciado |
+|----|----|
+| **Regra 1** | $k$ resultados por tentativa, $n$ tentativas: $k^n$ resultados |
+| **Regra 2** | $n!$ arranjos de $n$ objetos distintos |
+| **Regra 3** | $\dfrac{n!}{n_1!\,n_2!\cdots n_r!}$ arranjos com objetos repetidos |
+| **Coeficiente binomial** | $\binom{n}{k}=\dfrac{n!}{k!(n-k)!}$, com $\binom{n}{k}=0$ se $k>n$ |
+| **Def. 1–3** | Espaço amostral $S$, ponto e evento (conjunto de pontos) |
+| **Def. 5** | Função de probabilidade: atribui probabilidade a cada ponto |
+| **Def. 7** | $P(A\mid B)=\dfrac{P(AB)}{P(B)}$, com $P(B)>0$ |
+| **Def. 8** | $A$ e $B$ independentes $\iff P(AB)=P(A)P(B)$ |
+
+**Propriedades usadas como axiomas:** $0\le P(A)\le 1$ e $P(S)=1$. Para eventos mutuamente exclusivos, $P(A\cup B)=P(A)+P(B)$. O complemento tem $P(A^c)=1-P(A)$, e em geral $P(A\cup B)=P(A)+P(B)-P(AB)$.
+
+**Expansão binomial:**
+
+$$(x+y)^n=\sum_{i=0}^{n}\binom{n}{i}x^{i}y^{n-i}$$
+
+### Variáveis aleatórias
+
+- **Distribuição binomial:** $f(x)=\binom{n}{x}p^{x}q^{\,n-x}$, com $q=1-p$.
+- **Uniforme discreta:** $f(x)=\dfrac1N$, para $x=1,\dots,N$.
+- **Hipergeométrica** (notação do Conover, $A$ itens do tipo 1, $B$ do tipo 2, amostra de tamanho $k$):
+
+$$f(x)=\frac{\binom{A}{x}\binom{B}{k-x}}{\binom{A+B}{k}}$$
+
+- **Função de distribuição:** $F(x)=P(X\le x)$.
+- **Independência:** $f(x,y)=f_X(x)f_Y(y)$ para todo par $(x,y)$.
+
+### Esperança, variância e quantis
+
+- **Quantil (Def. 1):** $x_p$ tal que $P(X<x_p)\le p$ e $P(X>x_p)\le 1-p$. Se houver mais de um número que satisfaça isso, o Conover adota a **média do maior com o menor**.
+- **Esperança:** $E(X)=\sum x f(x)$, e a **variância** é:
+
+$$\operatorname{Var}(X)=E[(X-\mu)^2]=E(X^2)-\mu^2$$
+
+- **Covariância e correlação:**
+
+$$\operatorname{Cov}(X,Y)=E(XY)-E(X)E(Y),\qquad \rho=\frac{\operatorname{Cov}(X,Y)}{\sigma_X\sigma_Y}$$
+
+- **Teorema 2:** se $X_1$ e $X_2$ são independentes, então $\operatorname{Cov}(X_1,X_2)=0$.
+- **Teorema 3 (variância de uma soma):**
+
+$$\operatorname{Var}\Big(\sum X_i\Big)=\sum\operatorname{Var}(X_i)+2\sum_{i<j}\operatorname{Cov}(X_i,X_j)$$
+
+- **Teorema 4 (binomial):** $E(X)=np$ e $\operatorname{Var}(X)=npq$.
+- **Teorema 5 (soma de** $n$ inteiros sorteados sem reposição de $1,\dots,N$):
+
+$$E(X)=\frac{n(N+1)}{2},\qquad \operatorname{Var}(X)=\frac{n(N-n)(N+1)}{12}$$
+
+### Normal, TCL e qui-quadrado
+
+- **Normal (Def. 3):** tem parâmetros $\mu$ e $\sigma$. A normal padrão tem $\mu=0$ e $\sigma=1$. Para trocar de escala:
+
+$$x_p=\mu+\sigma z_p,\qquad z_p=\frac{x_p-\mu}{\sigma}$$
+
+- **Teorema Central do Limite (Teorema 2):** sob condições gerais, $\dfrac{Y_n-\mu_n}{\sigma_n}$ tende à normal padrão quando $n\to\infty$. Na prática, $n>30$ costuma bastar, e às vezes $n=5$ ou $10$ já funciona.
+- **Qui-quadrado (Def. 4):** $E(W)=k$ e $\operatorname{Var}(W)=2k$.
+- **Teorema 3:** se $Z_1,\dots,Z_k$ são normais padrão independentes, então $\sum Z_i^2\sim\chi^2_k$.
+- **Teorema 4:** a soma de qui-quadrados independentes com $k_i$ graus de liberdade é qui-quadrado com $\sum k_i$ graus de liberdade.
+- **Aproximações de quantis do qui-quadrado** para $k$ grande (usadas no rodapé da Tabela A2):
+
+$$w_p\approx k+z_p\sqrt{2k},\qquad w_p\approx\tfrac12\big(z_p+\sqrt{2k-1}\big)^2,\qquad w_p\approx k\Big(1-\tfrac{2}{9k}+z_p\sqrt{\tfrac{2}{9k}}\Big)^3$$
+
+A primeira é a mais grosseira. As outras duas são melhores.
+
+### Comparação das distribuições do capítulo
+
+| Distribuição | Tipo | Média | Variância | Quando aparece |
+|----|----|----|----|----|
+| Binomial($n,p$) | discreta | $np$ | $npq$ | Contagem de sucessos com $p$ constante (cap. 3) |
+| Uniforme discreta($N$) | discreta | $\frac{N+1}{2}$ | $\frac{N^2-1}{12}$ | Posto de um item |
+| Hipergeométrica | discreta | $\frac{kA}{A+B}$ | (fórmula do livro) | Amostra sem reposição (cap. 4, Fisher) |
+| Normal($\mu,\sigma^2$) | contínua | $\mu$ | $\sigma^2$ | Aproximação via TCL |
+| Qui-quadrado($k$) | contínua | $k$ | $2k$ | Testes de contingência e aderência |
+
+## O que você precisa ter entendido ao fim do capítulo
+
+- Escolher entre $k^n$, $n!$ e $\binom{n}{k}$ conforme **a ordem importa ou não** e se **há repetição**.
+- Montar o espaço amostral e calcular probabilidades de eventos somando pontos.
+- Distinguir $P(A\mid B)$ de $P(B\mid A)$ e saber verificar independência por $P(AB)=P(A)P(B)$.
+- Dizer o que é uma variável aleatória, a diferença entre $f$ e $F$, e ler um quantil.
+- Calcular $E$, $\operatorname{Var}$, $\operatorname{Cov}$ e usar o Teorema 5, que será a base dos testes de postos.
+- Padronizar uma normal, usar o TCL e a correção de continuidade.
+- Saber que $\chi^2_k$ é soma de $k$ normais padrão ao quadrado e que seus graus de liberdade se somam.
+
+## Erros comuns ao aplicar os conceitos
+
+- **Misturar combinação com permutação.** Conferir sempre se a ordem importa.
+- **Esquecer objetos idênticos** (Regra 3) e contar arranjos repetidos.
+- **Trocar** $P(A\mid B)$ por $P(B\mid A)$ ou condicionar no evento errado. Os exercícios 11 e 13 da seção 1.2 têm respostas diferentes justamente por isso ($1/7$ contra $1/4$).
+- **Confundir "mutuamente exclusivos" com "independentes".** Eventos exclusivos com probabilidade positiva são dependentes.
+- **Achar que independência par a par basta** para independência mútua. Um problema da seção 1.2 mostra o contrário.
+- **Achar que covariância zero implica independência.** Só o sentido inverso vale (Teorema 2).
+- **Usar** $<$ no lugar de $\le$ em $F(x)$. Em variáveis discretas isso muda a resposta.
+- **Usar a variância no lugar do desvio padrão** ao padronizar. Se o enunciado dá variância 400, o desvio padrão é 20.
+- **Esquecer a correção de continuidade** ao aproximar uma binomial por uma normal.
+- **Aplicar o TCL com** $n$ pequeno e $p$ extremo sem verificar a aproximação.
+- **Usar graus de liberdade errados** no qui-quadrado, ou somar qui-quadrados que não são independentes.
+- **Usar a binomial para amostragem sem reposição de população pequena.** Aí o certo é a hipergeométrica.
+- **Em quantis de variável discreta,** esquecer a convenção do Conover (média dos extremos).
+
+## 5 exemplos resolvidos (do livro)
+
+### Exemplo 3: apostar na "exacta" em uma corrida de 8 cavalos
+
+**Pergunta:** quantos bilhetes comprar para garantir acertar o 1º e o 2º lugar?
+
+1.  O 1º lugar pode ser qualquer um dos 8 cavalos.
+2.  Fixado o 1º, restam 7 candidatos ao 2º.
+3.  Total: $8\cdot 7 = 56$ bilhetes.
+4.  A ordem completa de chegada tem $8! = 40\,320$ possibilidades.
+
+### Exemplo 5: sequências de 2 caras em 5 lançamentos
+
+1.  Cada sequência é um arranjo de 2 H e 3 T, e a ordem das caras entre si não importa.
+2.  Pela Regra 3:
+
+$$\binom{5}{2}=\frac{5!}{2!\,3!}=\frac{120}{12}=10$$
+
+3.  Listagem: HHTTT, HTHTT, HTTHT, HTTTH, THHTT, THTHT, THTTH, TTHHT, TTHTH, TTTHH.
+
+### Exemplo 7: calcular $(2+3)^4$ pela expansão binomial
+
+1.  Aplicar a fórmula com $x=2$, $y=3$, $n=4$:
+
+$$\sum_{i=0}^{4}\binom{4}{i}2^{i}3^{4-i}$$
+
+2.  Termos: $\binom40\cdot1\cdot81=81$, $\binom41\cdot2\cdot27=216$, $\binom42\cdot4\cdot9=216$, $\binom43\cdot8\cdot3=96$ e $\binom44\cdot16=16$.
+3.  Soma: $81+216+216+96+16=625=5^4$. ✓ (Na linha do livro, a ordem dos termos é a inversa.)
+
+### Exemplo 13: soma dos postos de 4 anúncios entre 12
+
+**Situação:** a agência ranqueou 12 anúncios, e o cliente escolheu 4, cujos postos foram 4, 6, 7 e 11. Se a escolha fosse independente do ranking, $X$ (soma dos postos) teria a distribuição do Teorema 5, com $n=4$ e $N=12$.
+
+1.  Média:
+
+$$E(X)=\frac{4\cdot13}{2}=26$$
+
+2.  Variância:
+
+$$\operatorname{Var}(X)=\frac{4\cdot(12-4)\cdot13}{12}=\frac{416}{12}\approx34{,}67$$
+
+3.  Desvio padrão: $\sigma=\sqrt{34{,}67}\approx5{,}9$.
+4.  O valor observado foi $X=4+6+7+11=28$, que fica a $(28-26)/5{,}9\approx0{,}34$ desvio padrão da média. Portanto, é compatível com a escolha ao acaso. Essa é a lógica dos testes de postos do capítulo 5.
+
+### Exemplo 4: QI acima de 125
+
+**Situação:** $X\sim N(100,15^2)$. Quer-se $P(X>125)$.
+
+1.  Padronizar:
+
+$$z=\frac{125-100}{15}=1{,}667$$
+
+2.  Tabela da normal: $P(Z\le1{,}667)\approx0{,}9522$.
+3.  Logo:
+
+$$P(X>125)=1-0{,}9522\approx0{,}048$$
+
+Cálculo exato: $0{,}0478$.
+
+## 5 exercícios resolvidos passo a passo
+
+### Exercício 1 (seção 1.1): comitê de 3 em um clube de 12
+
+1.  A ordem dos escolhidos não importa, então é combinação.
+2.  Resolver:
+
+$$\binom{12}{3}=\frac{12\cdot11\cdot10}{3\cdot2\cdot1}=220$$
+
+**Resposta: 220 comitês.**
+
+### Exercício 2 (seção 1.2, ex. 11): 3 lançamentos, probabilidade de HHH sabendo que houve ao menos 1 cara
+
+1.  $S$ tem 8 pontos equiprováveis. Seja $A=\{HHH\}$ e $B=$ "pelo menos uma cara".
+2.  $P(B)=1-P(TTT)=1-\tfrac18=\tfrac78$.
+3.  $AB=A$, logo $P(AB)=\tfrac18$.
+4.  Aplicar a Definição 7:
+
+$$P(A\mid B)=\frac{1/8}{7/8}=\frac17\approx0{,}143$$
+
+**Resposta: 1/7.** Por contraste, o exercício 13 ("sabendo que o 1º lançamento foi cara") dá $\tfrac{1/8}{1/2}=\tfrac14$. Condicionar em eventos diferentes dá respostas diferentes.
+
+### Exercício 3 (seção 1.3, problema sobre os 10 pacientes)
+
+**Enunciado:** cada paciente tem probabilidade 0,1 de cura em uma semana sem tratamento. Com a droga, 9 de 10 pacientes foram curados. Qual a probabilidade de pelo menos 9 curas **se a droga não tiver efeito**?
+
+1.  Se a droga não tem efeito, $X\sim\text{Binomial}(n=10,\;p=0{,}1)$.
+2.  Somar os casos $X=9$ e $X=10$:
+
+$$P(X\ge9)=\binom{10}{9}(0{,}1)^9(0{,}9)+\binom{10}{10}(0{,}1)^{10}$$
+
+3.  Calcular:
+
+$$=10\cdot10^{-9}\cdot0{,}9+10^{-10}=9\times10^{-9}+10^{-10}=9{,}1\times10^{-9}$$
+
+**Resposta:** cerca de $9{,}1\times10^{-9}$. Esse valor é minúsculo, então é difícil atribuir o resultado ao acaso, e a droga parece benéfica. Espaço amostral: as sequências de curado/não curado dos 10 pacientes. Variável aleatória: o número de curados.
+
+### Exercício 4 (seção 1.4, problema 8): 30 bilhetes, sorteio de 2 sem reposição
+
+**Pergunta:** média e variância da soma dos números.
+
+1.  Aplicar o Teorema 5 com $n=2$ e $N=30$.
+2.  Média:
+
+$$E(X)=\frac{2\cdot31}{2}=31$$
+
+3.  Variância:
+
+$$\operatorname{Var}(X)=\frac{2\cdot28\cdot31}{12}=\frac{1736}{12}\approx144{,}67$$
+
+4.  **Conferência por Teorema 3:** cada bilhete isolado tem $\operatorname{Var}=\frac{N^2-1}{12}=\frac{899}{12}\approx74{,}92$. Como o sorteio é sem reposição, a covariância entre os dois é negativa: $-\tfrac{74{,}92}{29}\approx-2{,}583$. Então:
+
+$$\operatorname{Var}(X)=2(74{,}92)+2(-2{,}583)\approx144{,}67$$ ✓
+
+**Resposta: média 31 e variância ≈ 144,67 (desvio padrão ≈ 12,03).**
+
+### Exercício 5 (seção 1.5, problema "Dairy Queen")
+
+**Enunciado:** 2000 moradores, cada um com probabilidade 0,25 de visitar. Estime $P(460<X<540)$.
+
+1.  $X\sim\text{Bin}(2000,\,0{,}25)$, logo $\mu=np=500$ e $\sigma^2=npq=375$, $\sigma\approx19{,}36$.
+2.  $460<X<540$ equivale a $461\le X\le539$. Com correção de continuidade, os limites passam a 460,5 e 539,5.
+3.  Padronizar:
+
+$$z=\frac{539{,}5-500}{19{,}36}\approx2{,}04$$
+
+4.  Pela simetria:
+
+$$P\approx2\Phi(2{,}04)-1=2(0{,}9793)-1\approx0{,}959$$
+
+**Resposta: ≈ 0,959.** O valor exato da binomial é 0,9587. Sem a correção de continuidade, sairia 0,961, um pouco pior.
+
+## Implementação em R
+
+Tudo no Capítulo 1 cabe no **R base** (pacote `stats`, já carregado). Os pacotes `gtools` e `combinat` só servem para **listar** arranjos ou combinações, não para calcular.
+
+``` r
+# ---- 1.1 Contagem ----
+factorial(8)               # 8! = 40320
+choose(12, 3)              # 220
+8 * 7                      # exacta: 56
+(2 + 3)^4                  # 625
+
+# Listar combinações/arranjos (opcional)
+# install.packages("gtools")
+library(gtools)
+combinations(n = 5, r = 2, v = c("H", "T", "T", "T", "T"), set = FALSE)  # exemplo de uso
+permutations(n = 3, r = 3, v = c("A", "B", "C"))                         # 6 arranjos
+
+# ---- 1.2 Probabilidade condicional (por enumeração) ----
+S <- expand.grid(t1 = c("H","T"), t2 = c("H","T"), t3 = c("H","T"))
+B <- rowSums(S == "H") >= 1
+A <- rowSums(S == "H") == 3
+sum(A & B) / sum(B)        # 1/7
+
+# ---- 1.3 Distribuições discretas ----
+dbinom(2, size = 6, prob = 1/3)      # f(2)
+pbinom(2, size = 6, prob = 1/3)      # F(2)
+1 - pbinom(8, size = 10, prob = 0.1) # P(X >= 9): 9.1e-09
+dunif(1:12, 1, 12)                   # (use 1/12 diretamente: uniforme discreta)
+dhyper(x = 1, m = 3, n = 4, k = 2)   # hipergeométrica: m=A, n=B, k=tamanho da amostra
+
+# ---- 1.4 Esperança e variância (soma de postos, Teorema 5) ----
+N <- 12; n <- 4
+n * (N + 1) / 2                      # média: 26
+n * (N - n) * (N + 1) / 12           # variância: 34.67
+# Conferência por simulação
+set.seed(1)
+sim <- replicate(1e5, sum(sample(1:N, n)))
+mean(sim); var(sim)
+
+# ---- 1.5 Normal, TCL, qui-quadrado ----
+1 - pnorm(125, mean = 100, sd = 15)           # 0.0478
+mu <- 2000 * 0.25; s <- sqrt(2000 * 0.25 * 0.75)
+pnorm(539.5, mu, s) - pnorm(460.5, mu, s)     # aproximação com correção: ~0.9586
+pbinom(539, 2000, .25) - pbinom(460, 2000, .25) # exato: 0.9587
+qnorm(0.95)                                   # quantil normal padrão
+qchisq(0.95, df = 4)                          # 9.488
+qchisq(0.95, df = 200)                        # 233.99
+```
+
+**Como implementar:** use sempre o prefixo que indica o que se quer. `d` dá a função de probabilidade ou densidade, `p` dá $F(x)=P(X\le x)$, `q` dá o quantil e `r` simula. Por exemplo, `dbinom`, `pbinom`, `qbinom`, `rbinom`. Cuidado com `dhyper(x, m, n, k)`: `m`, `n` e `k` não têm a mesma notação do Conover ($A$, $B$, $k$), mas mapeiam assim: `m = A`, `n = B`, `k = k`.
+
+## Testes marcados neste capítulo
+
+Este capítulo é teoria e não tem nenhum teste de hipótese. Ele sustenta os testes dos capítulos seguintes:
+
+| Conceito do Cap. 1 | Onde será usado |
+|----|----|
+| Binomial, $np$, $npq$ | Cap. 3 (teste binomial, quantil, sinais) |
+| Hipergeométrica | Cap. 4 (teste exato de Fisher) |
+| Qui-quadrado | Cap. 4 (independência, aderência, Cochran) |
+| Teorema 5 (soma de postos) | Cap. 5 (Mann-Whitney, Kruskal-Wallis, Wilcoxon etc.) |
+| Normal e TCL | Aproximações em todos os capítulos |
+
+**Pendência:** a marcação dos testes que o professor selecionou e dos pacotes de R que ele usa depende da **apostila**, que ainda não foi enviada. Com ela, essa marcação entra a partir do Capítulo 2.

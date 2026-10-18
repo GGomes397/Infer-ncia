@@ -4,7 +4,8 @@ format: html
 editor: visual
 ---
 
-# Intervalos com as caudas iguais 
+# Intervalos com as caudas iguais
+
 ```{r}
 n <- 25
 s2 <- 120
@@ -27,6 +28,7 @@ cat("Comprimento do IC: ", comp_usual, "\n\n")
 ```
 
 # Intervalo com o menor comprimento
+
 ```{r}
 comprimento_ic <- function(p_inf) {
   p_sup <- p_inf + confianca
@@ -55,5 +57,3 @@ cat("Probabilidade alocada na cauda superior: ", round(1 - p_sup_otimo, 4), "\n"
 cat("Limites do IC: [", lim_inf_curto, ", ", lim_sup_curto, "]\n")
 cat("Comprimento do IC: ", comp_curto, "\n")
 ```
-
-

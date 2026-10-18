@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>resumo_livro_conover</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="resumo_livro_conover_files/libs/clipboard/clipboard.min.js"></script>
+<script src="resumo_livro_conover_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="resumo_livro_conover_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="resumo_livro_conover_files/libs/quarto-html/popper.min.js"></script>
+<script src="resumo_livro_conover_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="resumo_livro_conover_files/libs/quarto-html/anchor.min.js"></script>
+<link href="resumo_livro_conover_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="resumo_livro_conover_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="resumo_livro_conover_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="resumo_livro_conover_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="resumo_livro_conover_files/libs/bootstrap/bootstrap-215b371544c282197b31c8aa00ce3677.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+
+<section id="resumo-do-capítulo-1-teoria-da-probabilidade-conover-3ª-ed." class="level1">
+<h1>Resumo do Capítulo 1: Teoria da Probabilidade (Conover, 3ª ed.)</h1>
+<blockquote class="blockquote">
+<p><strong>Fonte:</strong> páginas 5–67 do livro (OCR do PDF escaneado). Conferi os valores numéricos em Python/scipy, mas <strong>não executei o código em R</strong>, porque o ambiente não tem R instalado. Os exercícios estão numerados como no scan, que pode estar errado em alguns casos. Por isso cito também o enunciado.</p>
+</blockquote>
+<section id="ideia-do-capítulo" class="level2">
+<h2 class="anchored" data-anchor-id="ideia-do-capítulo">Ideia do capítulo</h2>
+<p>O Conover monta aqui a “caixa de ferramentas” mínima de probabilidade para entender os testes dos capítulos seguintes. A ideia central é que <strong>quase todo teste não paramétrico é uma conta de contagem</strong>. Conta-se quantos resultados são possíveis, quantos são tão ou mais extremos que o observado, e divide-se um pelo outro. Por isso o capítulo vai de contar (1.1) a probabilidade (1.2), variáveis aleatórias (1.3), esperança e variância (1.4) e, por fim, aproximações pela normal e pelo qui-quadrado (1.5).</p>
+</section>
+<section id="resumo-passo-a-passo" class="level2">
+<h2 class="anchored" data-anchor-id="resumo-passo-a-passo">Resumo passo a passo</h2>
+<section id="contagem" class="level3">
+<h3 class="anchored" data-anchor-id="contagem">1.1 Contagem</h3>
+<ul>
+<li><strong>Experimento</strong> é um procedimento com regras definidas e resultado desconhecido. Cada repetição é uma <strong>tentativa</strong> (<em>trial</em>), e os resultados possíveis são <strong>eventos</strong>.</li>
+<li>A moeda é o protótipo de qualquer experimento com dois resultados (cura/não cura, marca A/outras marcas).</li>
+<li>Se cada tentativa tem <span class="math inline">\(k\)</span> resultados e há <span class="math inline">\(n\)</span> tentativas, o experimento todo tem <span class="math inline">\(k^n\)</span> resultados (<strong>Regra 1</strong>).</li>
+<li>Arranjar <span class="math inline">\(n\)</span> objetos distintos em fila dá <span class="math inline">\(n!\)</span> maneiras, com <span class="math inline">\(0! = 1\)</span> (<strong>Regra 2</strong>).</li>
+<li>Se há objetos idênticos, divide-se pelas permutações internas de cada grupo (<strong>Regra 3</strong>). Com dois grupos, isso dá o <strong>coeficiente binomial</strong>.</li>
+<li>O coeficiente binomial também responde “de quantas formas escolho <span class="math inline">\(k\)</span> de <span class="math inline">\(n\)</span>?”. A expansão <span class="math inline">\((x+y)^n\)</span> explica o nome.</li>
+</ul>
+</section>
+<section id="probabilidade" class="level3">
+<h3 class="anchored" data-anchor-id="probabilidade">1.2 Probabilidade</h3>
+<ul>
+<li>Define-se o <strong>espaço amostral</strong> <span class="math inline">\(S\)</span>, seus <strong>pontos</strong> e os <strong>eventos</strong> (conjuntos de pontos).</li>
+<li>A probabilidade é uma função que atribui um número a cada evento (Definição 4: limite da frequência relativa).</li>
+<li>O evento “A e B” é a <strong>interseção</strong> (Definição 6, <span class="math inline">\(AB\)</span>), e “A ou B” é a união.</li>
+<li>A <strong>probabilidade condicional</strong> redefine o espaço amostral para <span class="math inline">\(B\)</span>.</li>
+<li><strong>Independência</strong> significa que saber de <span class="math inline">\(B\)</span> não altera a probabilidade de <span class="math inline">\(A\)</span>. Vale também para experimentos inteiros (Definições 9–10).</li>
+</ul>
+</section>
+<section id="variáveis-aleatórias" class="level3">
+<h3 class="anchored" data-anchor-id="variáveis-aleatórias">1.3 Variáveis aleatórias</h3>
+<ul>
+<li>Uma <strong>variável aleatória</strong> é uma função que leva pontos do espaço amostral a números reais.</li>
+<li>A <strong>função de probabilidade</strong> <span class="math inline">\(f(x)=P(X=x)\)</span> e a <strong>função de distribuição</strong> <span class="math inline">\(F(x)=P(X\le x)\)</span> descrevem a variável.</li>
+<li>Distribuições discretas centrais: <strong>binomial</strong>, <strong>uniforme discreta</strong> e <strong>hipergeométrica</strong>.</li>
+<li>A distribuição <strong>conjunta</strong> e a <strong>condicional</strong> tratam de várias variáveis ao mesmo tempo. Independência de variáveis significa que a conjunta é o produto das marginais.</li>
+</ul>
+</section>
+<section id="propriedades-de-variáveis-aleatórias" class="level3">
+<h3 class="anchored" data-anchor-id="propriedades-de-variáveis-aleatórias">1.4 Propriedades de variáveis aleatórias</h3>
+<ul>
+<li><strong>Quantis</strong> (mediana, quartis, decis, percentis).</li>
+<li><strong>Esperança</strong> (média) e <strong>variância</strong>.</li>
+<li><strong>Covariância</strong> e <strong>correlação</strong>.</li>
+<li>Resultados prontos para usar depois: média e variância da binomial (Teorema 4) e da <strong>soma de</strong> <span class="math inline">\(n\)</span> inteiros sorteados sem reposição (Teorema 5). Este último é a base dos testes de postos.</li>
+</ul>
+</section>
+<section id="variáveis-contínuas" class="level3">
+<h3 class="anchored" data-anchor-id="variáveis-contínuas">1.5 Variáveis contínuas</h3>
+<ul>
+<li>A <strong>normal</strong> tem as quantidades tabeladas, e quantis de qualquer normal saem do quantil padrão.</li>
+<li>O <strong>Teorema Central do Limite</strong> justifica aproximar somas por uma normal. Um caso importante é a binomial com <span class="math inline">\(n\)</span> grande.</li>
+<li>A <strong>qui-quadrado</strong> é a soma de quadrados de normais padrão. Surge em vários testes dos capítulos 3 e 4.</li>
+</ul>
+</section>
+</section>
+<section id="definições-teoremas-e-regras-mais-importantes" class="level2">
+<h2 class="anchored" data-anchor-id="definições-teoremas-e-regras-mais-importantes">Definições, teoremas e regras mais importantes</h2>
+<section id="contagem-e-probabilidade" class="level3">
+<h3 class="anchored" data-anchor-id="contagem-e-probabilidade">Contagem e probabilidade</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Item</th>
+<th>Enunciado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Regra 1</strong></td>
+<td><span class="math inline">\(k\)</span> resultados por tentativa, <span class="math inline">\(n\)</span> tentativas: <span class="math inline">\(k^n\)</span> resultados</td>
+</tr>
+<tr class="even">
+<td><strong>Regra 2</strong></td>
+<td><span class="math inline">\(n!\)</span> arranjos de <span class="math inline">\(n\)</span> objetos distintos</td>
+</tr>
+<tr class="odd">
+<td><strong>Regra 3</strong></td>
+<td><span class="math inline">\(\dfrac{n!}{n_1!\,n_2!\cdots n_r!}\)</span> arranjos com objetos repetidos</td>
+</tr>
+<tr class="even">
+<td><strong>Coeficiente binomial</strong></td>
+<td><span class="math inline">\(\binom{n}{k}=\dfrac{n!}{k!(n-k)!}\)</span>, com <span class="math inline">\(\binom{n}{k}=0\)</span> se <span class="math inline">\(k&gt;n\)</span></td>
+</tr>
+<tr class="odd">
+<td><strong>Def. 1–3</strong></td>
+<td>Espaço amostral <span class="math inline">\(S\)</span>, ponto e evento (conjunto de pontos)</td>
+</tr>
+<tr class="even">
+<td><strong>Def. 5</strong></td>
+<td>Função de probabilidade: atribui probabilidade a cada ponto</td>
+</tr>
+<tr class="odd">
+<td><strong>Def. 7</strong></td>
+<td><span class="math inline">\(P(A\mid B)=\dfrac{P(AB)}{P(B)}\)</span>, com <span class="math inline">\(P(B)&gt;0\)</span></td>
+</tr>
+<tr class="even">
+<td><strong>Def. 8</strong></td>
+<td><span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span> independentes <span class="math inline">\(\iff P(AB)=P(A)P(B)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Propriedades usadas como axiomas:</strong> <span class="math inline">\(0\le P(A)\le 1\)</span> e <span class="math inline">\(P(S)=1\)</span>. Para eventos mutuamente exclusivos, <span class="math inline">\(P(A\cup B)=P(A)+P(B)\)</span>. O complemento tem <span class="math inline">\(P(A^c)=1-P(A)\)</span>, e em geral <span class="math inline">\(P(A\cup B)=P(A)+P(B)-P(AB)\)</span>.</p>
+<p><strong>Expansão binomial:</strong></p>
+<p><span class="math display">\[(x+y)^n=\sum_{i=0}^{n}\binom{n}{i}x^{i}y^{n-i}\]</span></p>
+</section>
+<section id="variáveis-aleatórias-1" class="level3">
+<h3 class="anchored" data-anchor-id="variáveis-aleatórias-1">Variáveis aleatórias</h3>
+<ul>
+<li><strong>Distribuição binomial:</strong> <span class="math inline">\(f(x)=\binom{n}{x}p^{x}q^{\,n-x}\)</span>, com <span class="math inline">\(q=1-p\)</span>.</li>
+<li><strong>Uniforme discreta:</strong> <span class="math inline">\(f(x)=\dfrac1N\)</span>, para <span class="math inline">\(x=1,\dots,N\)</span>.</li>
+<li><strong>Hipergeométrica</strong> (notação do Conover, <span class="math inline">\(A\)</span> itens do tipo 1, <span class="math inline">\(B\)</span> do tipo 2, amostra de tamanho <span class="math inline">\(k\)</span>):</li>
+</ul>
+<p><span class="math display">\[f(x)=\frac{\binom{A}{x}\binom{B}{k-x}}{\binom{A+B}{k}}\]</span></p>
+<ul>
+<li><strong>Função de distribuição:</strong> <span class="math inline">\(F(x)=P(X\le x)\)</span>.</li>
+<li><strong>Independência:</strong> <span class="math inline">\(f(x,y)=f_X(x)f_Y(y)\)</span> para todo par <span class="math inline">\((x,y)\)</span>.</li>
+</ul>
+</section>
+<section id="esperança-variância-e-quantis" class="level3">
+<h3 class="anchored" data-anchor-id="esperança-variância-e-quantis">Esperança, variância e quantis</h3>
+<ul>
+<li><strong>Quantil (Def. 1):</strong> <span class="math inline">\(x_p\)</span> tal que <span class="math inline">\(P(X&lt;x_p)\le p\)</span> e <span class="math inline">\(P(X&gt;x_p)\le 1-p\)</span>. Se houver mais de um número que satisfaça isso, o Conover adota a <strong>média do maior com o menor</strong>.</li>
+<li><strong>Esperança:</strong> <span class="math inline">\(E(X)=\sum x f(x)\)</span>, e a <strong>variância</strong> é:</li>
+</ul>
+<p><span class="math display">\[\operatorname{Var}(X)=E[(X-\mu)^2]=E(X^2)-\mu^2\]</span></p>
+<ul>
+<li><strong>Covariância e correlação:</strong></li>
+</ul>
+<p><span class="math display">\[\operatorname{Cov}(X,Y)=E(XY)-E(X)E(Y),\qquad \rho=\frac{\operatorname{Cov}(X,Y)}{\sigma_X\sigma_Y}\]</span></p>
+<ul>
+<li><strong>Teorema 2:</strong> se <span class="math inline">\(X_1\)</span> e <span class="math inline">\(X_2\)</span> são independentes, então <span class="math inline">\(\operatorname{Cov}(X_1,X_2)=0\)</span>.</li>
+<li><strong>Teorema 3 (variância de uma soma):</strong></li>
+</ul>
+<p><span class="math display">\[\operatorname{Var}\Big(\sum X_i\Big)=\sum\operatorname{Var}(X_i)+2\sum_{i&lt;j}\operatorname{Cov}(X_i,X_j)\]</span></p>
+<ul>
+<li><strong>Teorema 4 (binomial):</strong> <span class="math inline">\(E(X)=np\)</span> e <span class="math inline">\(\operatorname{Var}(X)=npq\)</span>.</li>
+<li><strong>Teorema 5 (soma de</strong> <span class="math inline">\(n\)</span> inteiros sorteados sem reposição de <span class="math inline">\(1,\dots,N\)</span>):</li>
+</ul>
+<p><span class="math display">\[E(X)=\frac{n(N+1)}{2},\qquad \operatorname{Var}(X)=\frac{n(N-n)(N+1)}{12}\]</span></p>
+</section>
+<section id="normal-tcl-e-qui-quadrado" class="level3">
+<h3 class="anchored" data-anchor-id="normal-tcl-e-qui-quadrado">Normal, TCL e qui-quadrado</h3>
+<ul>
+<li><strong>Normal (Def. 3):</strong> tem parâmetros <span class="math inline">\(\mu\)</span> e <span class="math inline">\(\sigma\)</span>. A normal padrão tem <span class="math inline">\(\mu=0\)</span> e <span class="math inline">\(\sigma=1\)</span>. Para trocar de escala:</li>
+</ul>
+<p><span class="math display">\[x_p=\mu+\sigma z_p,\qquad z_p=\frac{x_p-\mu}{\sigma}\]</span></p>
+<ul>
+<li><strong>Teorema Central do Limite (Teorema 2):</strong> sob condições gerais, <span class="math inline">\(\dfrac{Y_n-\mu_n}{\sigma_n}\)</span> tende à normal padrão quando <span class="math inline">\(n\to\infty\)</span>. Na prática, <span class="math inline">\(n&gt;30\)</span> costuma bastar, e às vezes <span class="math inline">\(n=5\)</span> ou <span class="math inline">\(10\)</span> já funciona.</li>
+<li><strong>Qui-quadrado (Def. 4):</strong> <span class="math inline">\(E(W)=k\)</span> e <span class="math inline">\(\operatorname{Var}(W)=2k\)</span>.</li>
+<li><strong>Teorema 3:</strong> se <span class="math inline">\(Z_1,\dots,Z_k\)</span> são normais padrão independentes, então <span class="math inline">\(\sum Z_i^2\sim\chi^2_k\)</span>.</li>
+<li><strong>Teorema 4:</strong> a soma de qui-quadrados independentes com <span class="math inline">\(k_i\)</span> graus de liberdade é qui-quadrado com <span class="math inline">\(\sum k_i\)</span> graus de liberdade.</li>
+<li><strong>Aproximações de quantis do qui-quadrado</strong> para <span class="math inline">\(k\)</span> grande (usadas no rodapé da Tabela A2):</li>
+</ul>
+<p><span class="math display">\[w_p\approx k+z_p\sqrt{2k},\qquad w_p\approx\tfrac12\big(z_p+\sqrt{2k-1}\big)^2,\qquad w_p\approx k\Big(1-\tfrac{2}{9k}+z_p\sqrt{\tfrac{2}{9k}}\Big)^3\]</span></p>
+<p>A primeira é a mais grosseira. As outras duas são melhores.</p>
+</section>
+<section id="comparação-das-distribuições-do-capítulo" class="level3">
+<h3 class="anchored" data-anchor-id="comparação-das-distribuições-do-capítulo">Comparação das distribuições do capítulo</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Distribuição</th>
+<th>Tipo</th>
+<th>Média</th>
+<th>Variância</th>
+<th>Quando aparece</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Binomial(<span class="math inline">\(n,p\)</span>)</td>
+<td>discreta</td>
+<td><span class="math inline">\(np\)</span></td>
+<td><span class="math inline">\(npq\)</span></td>
+<td>Contagem de sucessos com <span class="math inline">\(p\)</span> constante (cap. 3)</td>
+</tr>
+<tr class="even">
+<td>Uniforme discreta(<span class="math inline">\(N\)</span>)</td>
+<td>discreta</td>
+<td><span class="math inline">\(\frac{N+1}{2}\)</span></td>
+<td><span class="math inline">\(\frac{N^2-1}{12}\)</span></td>
+<td>Posto de um item</td>
+</tr>
+<tr class="odd">
+<td>Hipergeométrica</td>
+<td>discreta</td>
+<td><span class="math inline">\(\frac{kA}{A+B}\)</span></td>
+<td>(fórmula do livro)</td>
+<td>Amostra sem reposição (cap. 4, Fisher)</td>
+</tr>
+<tr class="even">
+<td>Normal(<span class="math inline">\(\mu,\sigma^2\)</span>)</td>
+<td>contínua</td>
+<td><span class="math inline">\(\mu\)</span></td>
+<td><span class="math inline">\(\sigma^2\)</span></td>
+<td>Aproximação via TCL</td>
+</tr>
+<tr class="odd">
+<td>Qui-quadrado(<span class="math inline">\(k\)</span>)</td>
+<td>contínua</td>
+<td><span class="math inline">\(k\)</span></td>
+<td><span class="math inline">\(2k\)</span></td>
+<td>Testes de contingência e aderência</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="o-que-você-precisa-ter-entendido-ao-fim-do-capítulo" class="level2">
+<h2 class="anchored" data-anchor-id="o-que-você-precisa-ter-entendido-ao-fim-do-capítulo">O que você precisa ter entendido ao fim do capítulo</h2>
+<ul>
+<li>Escolher entre <span class="math inline">\(k^n\)</span>, <span class="math inline">\(n!\)</span> e <span class="math inline">\(\binom{n}{k}\)</span> conforme <strong>a ordem importa ou não</strong> e se <strong>há repetição</strong>.</li>
+<li>Montar o espaço amostral e calcular probabilidades de eventos somando pontos.</li>
+<li>Distinguir <span class="math inline">\(P(A\mid B)\)</span> de <span class="math inline">\(P(B\mid A)\)</span> e saber verificar independência por <span class="math inline">\(P(AB)=P(A)P(B)\)</span>.</li>
+<li>Dizer o que é uma variável aleatória, a diferença entre <span class="math inline">\(f\)</span> e <span class="math inline">\(F\)</span>, e ler um quantil.</li>
+<li>Calcular <span class="math inline">\(E\)</span>, <span class="math inline">\(\operatorname{Var}\)</span>, <span class="math inline">\(\operatorname{Cov}\)</span> e usar o Teorema 5, que será a base dos testes de postos.</li>
+<li>Padronizar uma normal, usar o TCL e a correção de continuidade.</li>
+<li>Saber que <span class="math inline">\(\chi^2_k\)</span> é soma de <span class="math inline">\(k\)</span> normais padrão ao quadrado e que seus graus de liberdade se somam.</li>
+</ul>
+</section>
+<section id="erros-comuns-ao-aplicar-os-conceitos" class="level2">
+<h2 class="anchored" data-anchor-id="erros-comuns-ao-aplicar-os-conceitos">Erros comuns ao aplicar os conceitos</h2>
+<ul>
+<li><strong>Misturar combinação com permutação.</strong> Conferir sempre se a ordem importa.</li>
+<li><strong>Esquecer objetos idênticos</strong> (Regra 3) e contar arranjos repetidos.</li>
+<li><strong>Trocar</strong> <span class="math inline">\(P(A\mid B)\)</span> por <span class="math inline">\(P(B\mid A)\)</span> ou condicionar no evento errado. Os exercícios 11 e 13 da seção 1.2 têm respostas diferentes justamente por isso (<span class="math inline">\(1/7\)</span> contra <span class="math inline">\(1/4\)</span>).</li>
+<li><strong>Confundir “mutuamente exclusivos” com “independentes”.</strong> Eventos exclusivos com probabilidade positiva são dependentes.</li>
+<li><strong>Achar que independência par a par basta</strong> para independência mútua. Um problema da seção 1.2 mostra o contrário.</li>
+<li><strong>Achar que covariância zero implica independência.</strong> Só o sentido inverso vale (Teorema 2).</li>
+<li><strong>Usar</strong> <span class="math inline">\(&lt;\)</span> no lugar de <span class="math inline">\(\le\)</span> em <span class="math inline">\(F(x)\)</span>. Em variáveis discretas isso muda a resposta.</li>
+<li><strong>Usar a variância no lugar do desvio padrão</strong> ao padronizar. Se o enunciado dá variância 400, o desvio padrão é 20.</li>
+<li><strong>Esquecer a correção de continuidade</strong> ao aproximar uma binomial por uma normal.</li>
+<li><strong>Aplicar o TCL com</strong> <span class="math inline">\(n\)</span> pequeno e <span class="math inline">\(p\)</span> extremo sem verificar a aproximação.</li>
+<li><strong>Usar graus de liberdade errados</strong> no qui-quadrado, ou somar qui-quadrados que não são independentes.</li>
+<li><strong>Usar a binomial para amostragem sem reposição de população pequena.</strong> Aí o certo é a hipergeométrica.</li>
+<li><strong>Em quantis de variável discreta,</strong> esquecer a convenção do Conover (média dos extremos).</li>
+</ul>
+</section>
+<section id="exemplos-resolvidos-do-livro" class="level2">
+<h2 class="anchored" data-anchor-id="exemplos-resolvidos-do-livro">5 exemplos resolvidos (do livro)</h2>
+<section id="exemplo-3-apostar-na-exacta-em-uma-corrida-de-8-cavalos" class="level3">
+<h3 class="anchored" data-anchor-id="exemplo-3-apostar-na-exacta-em-uma-corrida-de-8-cavalos">Exemplo 3: apostar na “exacta” em uma corrida de 8 cavalos</h3>
+<p><strong>Pergunta:</strong> quantos bilhetes comprar para garantir acertar o 1º e o 2º lugar?</p>
+<ol type="1">
+<li>O 1º lugar pode ser qualquer um dos 8 cavalos.</li>
+<li>Fixado o 1º, restam 7 candidatos ao 2º.</li>
+<li>Total: <span class="math inline">\(8\cdot 7 = 56\)</span> bilhetes.</li>
+<li>A ordem completa de chegada tem <span class="math inline">\(8! = 40\,320\)</span> possibilidades.</li>
+</ol>
+</section>
+<section id="exemplo-5-sequências-de-2-caras-em-5-lançamentos" class="level3">
+<h3 class="anchored" data-anchor-id="exemplo-5-sequências-de-2-caras-em-5-lançamentos">Exemplo 5: sequências de 2 caras em 5 lançamentos</h3>
+<ol type="1">
+<li>Cada sequência é um arranjo de 2 H e 3 T, e a ordem das caras entre si não importa.</li>
+<li>Pela Regra 3:</li>
+</ol>
+<p><span class="math display">\[\binom{5}{2}=\frac{5!}{2!\,3!}=\frac{120}{12}=10\]</span></p>
+<ol start="3" type="1">
+<li>Listagem: HHTTT, HTHTT, HTTHT, HTTTH, THHTT, THTHT, THTTH, TTHHT, TTHTH, TTTHH.</li>
+</ol>
+</section>
+<section id="exemplo-7-calcular-234-pela-expansão-binomial" class="level3">
+<h3 class="anchored" data-anchor-id="exemplo-7-calcular-234-pela-expansão-binomial">Exemplo 7: calcular <span class="math inline">\((2+3)^4\)</span> pela expansão binomial</h3>
+<ol type="1">
+<li>Aplicar a fórmula com <span class="math inline">\(x=2\)</span>, <span class="math inline">\(y=3\)</span>, <span class="math inline">\(n=4\)</span>:</li>
+</ol>
+<p><span class="math display">\[\sum_{i=0}^{4}\binom{4}{i}2^{i}3^{4-i}\]</span></p>
+<ol start="2" type="1">
+<li>Termos: <span class="math inline">\(\binom40\cdot1\cdot81=81\)</span>, <span class="math inline">\(\binom41\cdot2\cdot27=216\)</span>, <span class="math inline">\(\binom42\cdot4\cdot9=216\)</span>, <span class="math inline">\(\binom43\cdot8\cdot3=96\)</span> e <span class="math inline">\(\binom44\cdot16=16\)</span>.</li>
+<li>Soma: <span class="math inline">\(81+216+216+96+16=625=5^4\)</span>. ✓ (Na linha do livro, a ordem dos termos é a inversa.)</li>
+</ol>
+</section>
+<section id="exemplo-13-soma-dos-postos-de-4-anúncios-entre-12" class="level3">
+<h3 class="anchored" data-anchor-id="exemplo-13-soma-dos-postos-de-4-anúncios-entre-12">Exemplo 13: soma dos postos de 4 anúncios entre 12</h3>
+<p><strong>Situação:</strong> a agência ranqueou 12 anúncios, e o cliente escolheu 4, cujos postos foram 4, 6, 7 e 11. Se a escolha fosse independente do ranking, <span class="math inline">\(X\)</span> (soma dos postos) teria a distribuição do Teorema 5, com <span class="math inline">\(n=4\)</span> e <span class="math inline">\(N=12\)</span>.</p>
+<ol type="1">
+<li>Média:</li>
+</ol>
+<p><span class="math display">\[E(X)=\frac{4\cdot13}{2}=26\]</span></p>
+<ol start="2" type="1">
+<li>Variância:</li>
+</ol>
+<p><span class="math display">\[\operatorname{Var}(X)=\frac{4\cdot(12-4)\cdot13}{12}=\frac{416}{12}\approx34{,}67\]</span></p>
+<ol start="3" type="1">
+<li>Desvio padrão: <span class="math inline">\(\sigma=\sqrt{34{,}67}\approx5{,}9\)</span>.</li>
+<li>O valor observado foi <span class="math inline">\(X=4+6+7+11=28\)</span>, que fica a <span class="math inline">\((28-26)/5{,}9\approx0{,}34\)</span> desvio padrão da média. Portanto, é compatível com a escolha ao acaso. Essa é a lógica dos testes de postos do capítulo 5.</li>
+</ol>
+</section>
+<section id="exemplo-4-qi-acima-de-125" class="level3">
+<h3 class="anchored" data-anchor-id="exemplo-4-qi-acima-de-125">Exemplo 4: QI acima de 125</h3>
+<p><strong>Situação:</strong> <span class="math inline">\(X\sim N(100,15^2)\)</span>. Quer-se <span class="math inline">\(P(X&gt;125)\)</span>.</p>
+<ol type="1">
+<li>Padronizar:</li>
+</ol>
+<p><span class="math display">\[z=\frac{125-100}{15}=1{,}667\]</span></p>
+<ol start="2" type="1">
+<li>Tabela da normal: <span class="math inline">\(P(Z\le1{,}667)\approx0{,}9522\)</span>.</li>
+<li>Logo:</li>
+</ol>
+<p><span class="math display">\[P(X&gt;125)=1-0{,}9522\approx0{,}048\]</span></p>
+<p>Cálculo exato: <span class="math inline">\(0{,}0478\)</span>.</p>
+</section>
+</section>
+<section id="exercícios-resolvidos-passo-a-passo" class="level2">
+<h2 class="anchored" data-anchor-id="exercícios-resolvidos-passo-a-passo">5 exercícios resolvidos passo a passo</h2>
+<section id="exercício-1-seção-1.1-comitê-de-3-em-um-clube-de-12" class="level3">
+<h3 class="anchored" data-anchor-id="exercício-1-seção-1.1-comitê-de-3-em-um-clube-de-12">Exercício 1 (seção 1.1): comitê de 3 em um clube de 12</h3>
+<ol type="1">
+<li>A ordem dos escolhidos não importa, então é combinação.</li>
+<li>Resolver:</li>
+</ol>
+<p><span class="math display">\[\binom{12}{3}=\frac{12\cdot11\cdot10}{3\cdot2\cdot1}=220\]</span></p>
+<p><strong>Resposta: 220 comitês.</strong></p>
+</section>
+<section id="exercício-2-seção-1.2-ex.-11-3-lançamentos-probabilidade-de-hhh-sabendo-que-houve-ao-menos-1-cara" class="level3">
+<h3 class="anchored" data-anchor-id="exercício-2-seção-1.2-ex.-11-3-lançamentos-probabilidade-de-hhh-sabendo-que-houve-ao-menos-1-cara">Exercício 2 (seção 1.2, ex. 11): 3 lançamentos, probabilidade de HHH sabendo que houve ao menos 1 cara</h3>
+<ol type="1">
+<li><span class="math inline">\(S\)</span> tem 8 pontos equiprováveis. Seja <span class="math inline">\(A=\{HHH\}\)</span> e <span class="math inline">\(B=\)</span> “pelo menos uma cara”.</li>
+<li><span class="math inline">\(P(B)=1-P(TTT)=1-\tfrac18=\tfrac78\)</span>.</li>
+<li><span class="math inline">\(AB=A\)</span>, logo <span class="math inline">\(P(AB)=\tfrac18\)</span>.</li>
+<li>Aplicar a Definição 7:</li>
+</ol>
+<p><span class="math display">\[P(A\mid B)=\frac{1/8}{7/8}=\frac17\approx0{,}143\]</span></p>
+<p><strong>Resposta: 1/7.</strong> Por contraste, o exercício 13 (“sabendo que o 1º lançamento foi cara”) dá <span class="math inline">\(\tfrac{1/8}{1/2}=\tfrac14\)</span>. Condicionar em eventos diferentes dá respostas diferentes.</p>
+</section>
+<section id="exercício-3-seção-1.3-problema-sobre-os-10-pacientes" class="level3">
+<h3 class="anchored" data-anchor-id="exercício-3-seção-1.3-problema-sobre-os-10-pacientes">Exercício 3 (seção 1.3, problema sobre os 10 pacientes)</h3>
+<p><strong>Enunciado:</strong> cada paciente tem probabilidade 0,1 de cura em uma semana sem tratamento. Com a droga, 9 de 10 pacientes foram curados. Qual a probabilidade de pelo menos 9 curas <strong>se a droga não tiver efeito</strong>?</p>
+<ol type="1">
+<li>Se a droga não tem efeito, <span class="math inline">\(X\sim\text{Binomial}(n=10,\;p=0{,}1)\)</span>.</li>
+<li>Somar os casos <span class="math inline">\(X=9\)</span> e <span class="math inline">\(X=10\)</span>:</li>
+</ol>
+<p><span class="math display">\[P(X\ge9)=\binom{10}{9}(0{,}1)^9(0{,}9)+\binom{10}{10}(0{,}1)^{10}\]</span></p>
+<ol start="3" type="1">
+<li>Calcular:</li>
+</ol>
+<p><span class="math display">\[=10\cdot10^{-9}\cdot0{,}9+10^{-10}=9\times10^{-9}+10^{-10}=9{,}1\times10^{-9}\]</span></p>
+<p><strong>Resposta:</strong> cerca de <span class="math inline">\(9{,}1\times10^{-9}\)</span>. Esse valor é minúsculo, então é difícil atribuir o resultado ao acaso, e a droga parece benéfica. Espaço amostral: as sequências de curado/não curado dos 10 pacientes. Variável aleatória: o número de curados.</p>
+</section>
+<section id="exercício-4-seção-1.4-problema-8-30-bilhetes-sorteio-de-2-sem-reposição" class="level3">
+<h3 class="anchored" data-anchor-id="exercício-4-seção-1.4-problema-8-30-bilhetes-sorteio-de-2-sem-reposição">Exercício 4 (seção 1.4, problema 8): 30 bilhetes, sorteio de 2 sem reposição</h3>
+<p><strong>Pergunta:</strong> média e variância da soma dos números.</p>
+<ol type="1">
+<li>Aplicar o Teorema 5 com <span class="math inline">\(n=2\)</span> e <span class="math inline">\(N=30\)</span>.</li>
+<li>Média:</li>
+</ol>
+<p><span class="math display">\[E(X)=\frac{2\cdot31}{2}=31\]</span></p>
+<ol start="3" type="1">
+<li>Variância:</li>
+</ol>
+<p><span class="math display">\[\operatorname{Var}(X)=\frac{2\cdot28\cdot31}{12}=\frac{1736}{12}\approx144{,}67\]</span></p>
+<ol start="4" type="1">
+<li><strong>Conferência por Teorema 3:</strong> cada bilhete isolado tem <span class="math inline">\(\operatorname{Var}=\frac{N^2-1}{12}=\frac{899}{12}\approx74{,}92\)</span>. Como o sorteio é sem reposição, a covariância entre os dois é negativa: <span class="math inline">\(-\tfrac{74{,}92}{29}\approx-2{,}583\)</span>. Então:</li>
+</ol>
+<p><span class="math display">\[\operatorname{Var}(X)=2(74{,}92)+2(-2{,}583)\approx144{,}67\]</span> ✓</p>
+<p><strong>Resposta: média 31 e variância ≈ 144,67 (desvio padrão ≈ 12,03).</strong></p>
+</section>
+<section id="exercício-5-seção-1.5-problema-dairy-queen" class="level3">
+<h3 class="anchored" data-anchor-id="exercício-5-seção-1.5-problema-dairy-queen">Exercício 5 (seção 1.5, problema “Dairy Queen”)</h3>
+<p><strong>Enunciado:</strong> 2000 moradores, cada um com probabilidade 0,25 de visitar. Estime <span class="math inline">\(P(460&lt;X&lt;540)\)</span>.</p>
+<ol type="1">
+<li><span class="math inline">\(X\sim\text{Bin}(2000,\,0{,}25)\)</span>, logo <span class="math inline">\(\mu=np=500\)</span> e <span class="math inline">\(\sigma^2=npq=375\)</span>, <span class="math inline">\(\sigma\approx19{,}36\)</span>.</li>
+<li><span class="math inline">\(460&lt;X&lt;540\)</span> equivale a <span class="math inline">\(461\le X\le539\)</span>. Com correção de continuidade, os limites passam a 460,5 e 539,5.</li>
+<li>Padronizar:</li>
+</ol>
+<p><span class="math display">\[z=\frac{539{,}5-500}{19{,}36}\approx2{,}04\]</span></p>
+<ol start="4" type="1">
+<li>Pela simetria:</li>
+</ol>
+<p><span class="math display">\[P\approx2\Phi(2{,}04)-1=2(0{,}9793)-1\approx0{,}959\]</span></p>
+<p><strong>Resposta: ≈ 0,959.</strong> O valor exato da binomial é 0,9587. Sem a correção de continuidade, sairia 0,961, um pouco pior.</p>
+</section>
+</section>
+<section id="implementação-em-r" class="level2">
+<h2 class="anchored" data-anchor-id="implementação-em-r">Implementação em R</h2>
+<p>Tudo no Capítulo 1 cabe no <strong>R base</strong> (pacote <code>stats</code>, já carregado). Os pacotes <code>gtools</code> e <code>combinat</code> só servem para <strong>listar</strong> arranjos ou combinações, não para calcular.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- 1.1 Contagem ----</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">factorial</span>(<span class="dv">8</span>)               <span class="co"># 8! = 40320</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">choose</span>(<span class="dv">12</span>, <span class="dv">3</span>)              <span class="co"># 220</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span> <span class="sc">*</span> <span class="dv">7</span>                      <span class="co"># exacta: 56</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span>)<span class="sc">^</span><span class="dv">4</span>                  <span class="co"># 625</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Listar combinações/arranjos (opcional)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("gtools")</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtools)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">combinations</span>(<span class="at">n =</span> <span class="dv">5</span>, <span class="at">r =</span> <span class="dv">2</span>, <span class="at">v =</span> <span class="fu">c</span>(<span class="st">"H"</span>, <span class="st">"T"</span>, <span class="st">"T"</span>, <span class="st">"T"</span>, <span class="st">"T"</span>), <span class="at">set =</span> <span class="cn">FALSE</span>)  <span class="co"># exemplo de uso</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">permutations</span>(<span class="at">n =</span> <span class="dv">3</span>, <span class="at">r =</span> <span class="dv">3</span>, <span class="at">v =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>))                         <span class="co"># 6 arranjos</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- 1.2 Probabilidade condicional (por enumeração) ----</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>S <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">t1 =</span> <span class="fu">c</span>(<span class="st">"H"</span>,<span class="st">"T"</span>), <span class="at">t2 =</span> <span class="fu">c</span>(<span class="st">"H"</span>,<span class="st">"T"</span>), <span class="at">t3 =</span> <span class="fu">c</span>(<span class="st">"H"</span>,<span class="st">"T"</span>))</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(S <span class="sc">==</span> <span class="st">"H"</span>) <span class="sc">&gt;=</span> <span class="dv">1</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(S <span class="sc">==</span> <span class="st">"H"</span>) <span class="sc">==</span> <span class="dv">3</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(A <span class="sc">&amp;</span> B) <span class="sc">/</span> <span class="fu">sum</span>(B)        <span class="co"># 1/7</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- 1.3 Distribuições discretas ----</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">2</span>, <span class="at">size =</span> <span class="dv">6</span>, <span class="at">prob =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)      <span class="co"># f(2)</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">2</span>, <span class="at">size =</span> <span class="dv">6</span>, <span class="at">prob =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)      <span class="co"># F(2)</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pbinom</span>(<span class="dv">8</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.1</span>) <span class="co"># P(X &gt;= 9): 9.1e-09</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">dunif</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="dv">1</span>, <span class="dv">12</span>)                   <span class="co"># (use 1/12 diretamente: uniforme discreta)</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu">dhyper</span>(<span class="at">x =</span> <span class="dv">1</span>, <span class="at">m =</span> <span class="dv">3</span>, <span class="at">n =</span> <span class="dv">4</span>, <span class="at">k =</span> <span class="dv">2</span>)   <span class="co"># hipergeométrica: m=A, n=B, k=tamanho da amostra</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- 1.4 Esperança e variância (soma de postos, Teorema 5) ----</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">12</span>; n <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>n <span class="sc">*</span> (N <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">/</span> <span class="dv">2</span>                      <span class="co"># média: 26</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>n <span class="sc">*</span> (N <span class="sc">-</span> n) <span class="sc">*</span> (N <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">/</span> <span class="dv">12</span>           <span class="co"># variância: 34.67</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Conferência por simulação</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>sim <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="fl">1e5</span>, <span class="fu">sum</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>N, n)))</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(sim); <span class="fu">var</span>(sim)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- 1.5 Normal, TCL, qui-quadrado ----</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="dv">125</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>)           <span class="co"># 0.0478</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">2000</span> <span class="sc">*</span> <span class="fl">0.25</span>; s <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">2000</span> <span class="sc">*</span> <span class="fl">0.25</span> <span class="sc">*</span> <span class="fl">0.75</span>)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">539.5</span>, mu, s) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="fl">460.5</span>, mu, s)     <span class="co"># aproximação com correção: ~0.9586</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">539</span>, <span class="dv">2000</span>, .<span class="dv">25</span>) <span class="sc">-</span> <span class="fu">pbinom</span>(<span class="dv">460</span>, <span class="dv">2000</span>, .<span class="dv">25</span>) <span class="co"># exato: 0.9587</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.95</span>)                                   <span class="co"># quantil normal padrão</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="fl">0.95</span>, <span class="at">df =</span> <span class="dv">4</span>)                          <span class="co"># 9.488</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="fl">0.95</span>, <span class="at">df =</span> <span class="dv">200</span>)                        <span class="co"># 233.99</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Como implementar:</strong> use sempre o prefixo que indica o que se quer. <code>d</code> dá a função de probabilidade ou densidade, <code>p</code> dá <span class="math inline">\(F(x)=P(X\le x)\)</span>, <code>q</code> dá o quantil e <code>r</code> simula. Por exemplo, <code>dbinom</code>, <code>pbinom</code>, <code>qbinom</code>, <code>rbinom</code>. Cuidado com <code>dhyper(x, m, n, k)</code>: <code>m</code>, <code>n</code> e <code>k</code> não têm a mesma notação do Conover (<span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, <span class="math inline">\(k\)</span>), mas mapeiam assim: <code>m = A</code>, <code>n = B</code>, <code>k = k</code>.</p>
+</section>
+<section id="testes-marcados-neste-capítulo" class="level2">
+<h2 class="anchored" data-anchor-id="testes-marcados-neste-capítulo">Testes marcados neste capítulo</h2>
+<p>Este capítulo é teoria e não tem nenhum teste de hipótese. Ele sustenta os testes dos capítulos seguintes:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Conceito do Cap. 1</th>
+<th>Onde será usado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Binomial, <span class="math inline">\(np\)</span>, <span class="math inline">\(npq\)</span></td>
+<td>Cap. 3 (teste binomial, quantil, sinais)</td>
+</tr>
+<tr class="even">
+<td>Hipergeométrica</td>
+<td>Cap. 4 (teste exato de Fisher)</td>
+</tr>
+<tr class="odd">
+<td>Qui-quadrado</td>
+<td>Cap. 4 (independência, aderência, Cochran)</td>
+</tr>
+<tr class="even">
+<td>Teorema 5 (soma de postos)</td>
+<td>Cap. 5 (Mann-Whitney, Kruskal-Wallis, Wilcoxon etc.)</td>
+</tr>
+<tr class="odd">
+<td>Normal e TCL</td>
+<td>Aproximações em todos os capítulos</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Pendência:</strong> a marcação dos testes que o professor selecionou e dos pacotes de R que ele usa depende da <strong>apostila</strong>, que ainda não foi enviada. Com ela, essa marcação entra a partir do Capítulo 2.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

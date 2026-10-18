@@ -1,0 +1,150 @@
+---
+title: "Lista 2- Cap 3"
+format: html
+editor: visual
+---
+
+# Lista de exercícios 3.1
+
+**Decida qual(is) teste(s) usar, de acordo com suas restrições.**
+
+**Referências**
+
+- **Conover (1999)** — *Practical Nonparametric Statistics*, 3ª ed.
+- **Sprent e Smeeton (2007)** — *Applied Nonparametric Statistical Methods*, 4ª ed.
+
+------------------------------------------------------------------------
+
+## Conover (1999), Cap. 3, pág. 164: exercícios 1 a 6
+
+**1.** Seis estudantes fizeram uma dieta na tentativa de perder peso, com os seguintes resultados:
+
+| Nome        | Abdul | Ed  | Jim | Max | Phil | Ray |
+|-------------|:-----:|:---:|:---:|:---:|:----:|:---:|
+| Peso antes  |  174  | 191 | 188 | 182 | 201  | 188 |
+| Peso depois |  165  | 186 | 183 | 178 | 203  | 181 |
+
+A dieta é um meio eficaz de perder peso?
+
+Queremos saber se dieta foi eficaz para a dieta ser eficaz o Peso de depois que começou a dieta para o peso anterior tem que ser menor então definiremos a seguinte estatística
+
+$$
+D_i=X_i-Y_i \\ \text{Onde }X\text{ é o peso anterior e }Y \text{ o peso atual}
+$$
+
+Se obtivermos que $D <0$ Temos que a dieta foi eficaz . Num nível de confiança de $5\%$ formularemos o seguinte teste
+
+$$
+H_0:D<0 \text{ } H_1:D > 0
+$$
+
+**2.** O tempo de reação antes do almoço foi comparado com o tempo de reação depois do almoço para um grupo de 28 funcionários de escritório. Vinte e dois funcionários constataram que seu tempo de reação antes do almoço era menor, e dois não conseguiram detectar diferença. O tempo de reação depois do almoço é significativamente maior que o tempo de reação antes do almoço?
+
+**3.** Dois aditivos diferentes foram comparados para ver qual é melhor para melhorar a durabilidade do concreto. Cem pequenas misturas de concreto foram preparadas sob várias condições e, durante a mistura, cada lote foi dividido em duas partes. Uma parte recebeu o aditivo A e a outra recebeu o aditivo B. Depois que o concreto endureceu, as duas partes de cada lote foram esmagadas uma contra a outra, e um observador determinou qual parte parecia ser a mais durável. Em 77 casos o concreto com o aditivo A foi considerado mais durável; em 23 casos o concreto com o aditivo B foi considerado mais durável. Há diferença significativa entre os efeitos dos dois aditivos?
+
+**4.** Vinte e dois clientes de uma mercearia foram solicitados a provar cada um de dois tipos de queijo e declarar sua preferência. Sete clientes preferiram um tipo, 12 preferiram o outro, e 3 não tiveram preferência. Isso indica uma diferença significativa na preferência?
+
+**5.** Um obstetra afirmou que nascem mais bebês à noite (das 18h às 6h) do que durante o dia, enquanto seu amigo estatístico disse que só parecia ser assim. Durante o ano seguinte, eles registraram o horário de nascimento de todos os partos espontâneos sob os cuidados desse médico para ver quem estava certo. O resultado foi:
+
+| Horário          | Nascimentos |
+|------------------|:-----------:|
+| Meia-noite às 3h |     16      |
+| 3h às 6h         |     17      |
+| 6h às 9h         |     12      |
+| 9h ao meio-dia   |      9      |
+| Meio-dia às 15h  |     10      |
+| 15h às 18h       |     11      |
+| 18h às 21h       |     12      |
+| 21h à meia-noite |     15      |
+
+O estatístico está correto?
+
+**6.** Em um laboratório, insetos de um certo tipo são soltos no meio de um círculo desenhado sobre uma mesa plana e lisa. Um odor, destinado a atrair esse tipo de inseto, está localizado em uma das extremidades da mesa. Cada inseto é solto individualmente e observado até cruzar a fronteira do círculo. Nesse momento, registra-se se o inseto cruzou a metade da fronteira "em direção ao" odor ou a metade "afastada do" odor. Ao final do experimento, 33 insetos foram "em direção ao" odor, 16 foram "para longe" e 12 não cruzaram a fronteira em um tempo razoável. O odor atrai esses insetos?
+
+------------------------------------------------------------------------
+
+## Conover (1999), Cap. 5, págs. 364–366: exercícios 1, 2 e 4
+
+**1.** Uma amostra aleatória de 20 pessoas que dirigiam automóveis foi selecionada para verificar se o álcool afeta o tempo de reação. O tempo de reação de cada motorista foi medido em laboratório antes e depois de beber uma quantidade especificada de uma bebida contendo álcool. Os tempos de reação, em segundos, foram os seguintes:
+
+| Sujeito | Antes | Depois |     | Sujeito | Antes | Depois |
+|:-------:|:-----:|:------:|-----|:-------:|:-----:|:------:|
+|    1    | 0,68  |  0,73  |     |   11    | 0,65  |  0,72  |
+|    2    | 0,64  |  0,62  |     |   12    | 0,59  |  0,60  |
+|    3    | 0,68  |  0,66  |     |   13    | 0,78  |  0,78  |
+|    4    | 0,82  |  0,92  |     |   14    | 0,67  |  0,66  |
+|    5    | 0,58  |  0,68  |     |   15    | 0,65  |  0,68  |
+|    6    | 0,80  |  0,87  |     |   16    | 0,76  |  0,77  |
+|    7    | 0,72  |  0,77  |     |   17    | 0,61  |  0,72  |
+|    8    | 0,65  |  0,70  |     |   18    | 0,86  |  0,86  |
+|    9    | 0,84  |  0,88  |     |   19    | 0,74  |  0,72  |
+|   10    | 0,73  |  0,79  |     |   20    | 0,88  |  0,97  |
+
+O álcool afeta o tempo de reação?
+
+**2.** Um merceeiro deseja verificar se a mediana do número de itens comprados em cada venda pode ser considerada igual a 10, então observa 12 clientes no caixa.
+
+| Cliente | Nº de itens |     | Cliente | Nº de itens |
+|:-------:|:-----------:|-----|:-------:|:-----------:|
+|    1    |     22      |     |    7    |     15      |
+|    2    |      9      |     |    8    |     26      |
+|    3    |      4      |     |    9    |     47      |
+|    4    |      5      |     |   10    |      8      |
+|    5    |      1      |     |   11    |     31      |
+|    6    |     16      |     |   12    |      7      |
+
+O teste de Wilcoxon pode ser usado? Quais suposições do modelo são violadas neste problema?
+
+**4.** Cada integrante de um time feminino de basquete fez um breve aquecimento e depois foi instruída a arremessar 25 lances livres. Registrou-se o número $X$ de acertos. Em seguida, o time fez um treino extenso e, após um breve descanso, cada jogadora foi instruída a arremessar outros 25 lances livres. O número $Y$ de tentativas bem-sucedidas foi novamente registrado. Os dados indicam que as porcentagens tendem a cair quando as jogadoras estão cansadas?
+
+| Jogadora       |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  | 10  | 11  | 12  |
+|----------------|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| $X_i$ (antes)  | 18  | 12  |  7  | 21  | 19  | 14  |  8  | 11  | 19  | 16  |  8  | 11  |
+| $Y_i$ (depois) | 16  | 10  |  8  | 23  | 13  | 10  |  8  | 13  |  9  |  8  |  8  |  5  |
+
+------------------------------------------------------------------------
+
+## Sprent e Smeeton (2007), Cap. 5: exercícios 1, 2, 4, 6 e 12
+
+**5.1.** As pressões arteriais de 11 pacientes são medidas antes e depois da administração de um medicamento. As diferenças na pressão arterial sistólica (pressão antes − pressão depois) para cada paciente são:
+
+```         
+7  5  12  −3  −5  2  14  18  19  21  −1
+```
+
+Use um teste não paramétrico apropriado para verificar se a amostra (suposta aleatória) fornece evidência de que o medicamento causa uma mudança significativa na pressão arterial.
+
+**5.2.** Amostras de creme de cada uma de 10 laticínios (A a J) são divididas em duas porções. Uma porção de cada uma é enviada ao Laboratório I, a outra ao Laboratório II, para contagem de bactérias. As contagens (milhares de bactérias por ml) são:
+
+| Laticínio |  A   |  B   |  C   |  D   |  E   |  F   |  G   |  H   |  I   |  J   |
+|-----------|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
+| Lab I     | 11,7 | 12,1 | 13,3 | 15,1 | 15,9 | 15,3 | 11,9 | 16,2 | 15,1 | 13,6 |
+| Lab II    | 10,9 | 11,9 | 13,4 | 15,4 | 14,8 | 14,8 | 12,3 | 15,0 | 14,2 | 13,1 |
+
+Use o teste dos postos sinalizados de Wilcoxon para avaliar a evidência de qualquer diferença consistente entre os laboratórios para subamostras do mesmo laticínio. Obtenha também intervalos de confiança nominais de 95 e 99 por cento para a diferença média e compare-os com os intervalos obtidos pelo método ótimo quando se supõe normalidade.
+
+**5.4.** Um psicólogo entrevista o pai e a mãe de cada uma de 17 crianças não aparentadas com dificuldades de aprendizagem, perguntando a cada um, individualmente, uma série de questões elaboradas para testar o quanto compreendem os problemas que seu filho provavelmente enfrentará na vida adulta. O psicólogo registra se o pai (F, de *father*) ou a mãe (M, de *mother*) demonstra melhor compreensão desses problemas potenciais. Para as 17 famílias, os resultados são:
+
+```         
+F  M  M  F  F  F  F  F  F  F  M  F  F  F  M  F  F
+```
+
+O psicólogo está justificado em concluir que há uma tendência de os pais demonstrarem melhor compreensão?
+
+**5.6.** Cem clínicos gerais participam de um workshop de promoção da saúde. No início do workshop, pede-se que indiquem se são a favor de perguntar rotineiramente aos pacientes sobre o consumo de álcool. Em seguida, assistem a um vídeo sobre os problemas de saúde e sociais causados pelo consumo excessivo de bebidas alcoólicas. O vídeo é seguido de discussão em pequenos grupos. Depois do vídeo e da discussão, a pergunta original é feita novamente. Os resultados abaixo indicam uma mudança significativa de atitude como resultado do vídeo e da discussão em grupo?
+
+|   | Antes do vídeo e da discussão: A favor | Antes do vídeo e da discussão: Contra |
+|----|:--:|:--:|
+| **Depois do vídeo e da discussão: A favor** | 41 | 27 |
+| **Depois do vídeo e da discussão: Contra** | 16 | 58 |
+
+**5.12.** Pearson e Sprent (1968) forneceram dados de perda auditiva (em decibéis abaixo de normas prescritas) em várias frequências. Os dados abaixo mostram essas perdas para 10 indivíduos com idades entre 46 e 54 anos nas frequências de 0,125 e 0,25 kc s⁻¹. Uma perda negativa indica audição acima da norma. Há indício de perda diferente nas duas frequências?
+
+| Sujeito      |  A  |  B   |   C   |  D   |  E   |  F   |  G   |  H  |  I  |  J   |
+|--------------|:---:|:----:|:-----:|:----:|:----:|:----:|:----:|:---:|:---:|:----:|
+| 0,125 kc s⁻¹ | 2,5 | −7,5 | 11,25 | 7,5  | 10,0 | 5,0  | 7,5  | 2,5 | 5,0 | 8,75 |
+| 0,25 kc s⁻¹  | 2,5 | −5,0 | 6,25  | 6,25 | 7,5  | 3,75 | 1,25 | 0,0 | 2,5 | 5,0  |
+
+------------------------------------------------------------------------
+
+*Observações:* - *No Conover, o Cap. 3 (pág. 164) traz os exercícios 1 e 2, e os exercícios 3 a 6 estão na pág. 165, logo abaixo; a lista pede 1 a 6, então incluí todos. No Cap. 5, os exercícios 1, 2 e 4 estão nas págs. 364–365.* - *Os dados do Conover (PDF escaneado) foram conferidos com zoom nas tabelas; ainda assim, vale uma checagem rápida contra o livro.* - *Os exercícios 5.2, 5.4, 5.6 e 5.12 do Sprent e Smeeton aparecem com asterisco no livro (há solução no Apêndice 2).*

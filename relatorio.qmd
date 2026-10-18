@@ -1,0 +1,41 @@
+---
+title: "RELATÓRIO"
+format:
+  html: 
+    theme: cosmo
+    fontsize: 1.1em
+    linestretch: 1.7
+---
+
+# Valor-p: O que a comunidade estatística discute atualmente?
+
+Foram-nos passados dois artigos que tinham como tema o valor-p, os quais abordavam o assunto de formas diferentes. Ao ler esses dois textos, fomos apresentados a erros que muitos cientistas cometem e a equívocos que nós, como futuros estatísticos, podemos cometer.
+
+### 1. Qual era o problema que motivou os autores a escrever esse artigo?
+
+Os artigos nos apresentam erros cometidos em testes científicos que usam o valor-p como a única ou a principal conclusão sobre a nossa inferência, quando, na verdade, o valor-p é apenas uma evidência de rejeição de $H_{0}$.
+
+### 2. Qual é a principal mensagem do artigo?
+
+O valor-p é uma evidência para uma conclusão, mas não pode ser a única. Por isso, é importante termos mais de uma ferramenta para nos ajudar em nossas inferências.
+
+### 3. Quais interpretações incorretas do valor-p são discutidas pelos autores?
+
+- Há erros de interpretação que assumem que o valor-p e a probabilidade do erro do tipo I têm o mesmo valor numérico e, portanto, o mesmo significado. Contudo, o erro do tipo I é calculado antes de coletarmos a amostra, pois queremos um tamanho amostral adequado para fazer a inferência.
+- Outro erro ocorre quando, de uma mesma população, retiram-se duas amostras e o valor-p resulta em valores diferentes para cada uma delas. Há quem defenda que devemos escolher a amostra com o menor valor, quando isso indica apenas que as amostras têm tamanhos diferentes ou que variam naturalmente, mantendo a mesma conclusão fundamental.
+- O cuidado com o valor-p unicaudal, que pode enviesar as nossas conclusões.
+- A ideia de que o valor-p deve ser o juiz absoluto da nossa inferência e de que o que a amostra nos revela não é relevante, quando a amostra precisa, por si só, trazer evidências contra $H_{0}$ ou não.
+
+Esses foram alguns dos erros discutidos.
+
+### 4. Os autores defendem abandonar o valor-p ou apenas modificar a forma como ele é interpretado e utilizado?
+
+Eles defendem a ideia de não ficarmos dependentes apenas do valor-p, mas sim de usá-lo dependendo do contexto e com a interpretação correta. Devemos associá-lo a outras ferramentas em nossas inferências e, claro, nunca nos basearmos em um único indicador.
+
+### 5. Qual a diferença entre dizer que um resultado não foi estatisticamente significativo e afirmar que não existe efeito?
+
+O autor de "Moving to a world beyond 'p \< 0.05'" menciona em certo momento do texto que, de tanto os cientistas usarem esse limiar de forma errada, a expressão "estatisticamente significativo" perdeu o sentido, pois o valor-p sozinho não dita se há ou não relevância prática ou efeito real.
+
+### 6. Após a leitura do artigo, sua forma de interpretar um resultado estatístico mudou? Explique.
+
+A primeira coisa que percebi é que, em muitos dos meus trabalhos, cometi o mesmo erro e me baseei apenas no resultado do valor-p ou em um único gráfico. Após a leitura, entendi que, para fazer análises não enviesadas e com relevância estatística, não posso ficar presa apenas à teoria ou validar meus resultados puramente por cálculos matemáticos; é preciso olhar para os dados reais e confrontar a teoria com as informações contextuais. Uma boa conclusão não é feita sempre da mesma forma. Portanto, para melhorar, quero aumentar a minha "caixa de ferramentas".

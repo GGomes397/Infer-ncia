@@ -1,0 +1,363 @@
+---
+title: "Lista do Capítulo 3: Duas Amostras Pareadas"
+subtitle: "inferência Não Paramétrica"
+author: "Geisielen Gomes"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-fold: show
+    theme: cosmo
+execute:
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+# Pacotes necessários
+if (!requireNamespace("lawstat", quietly = TRUE)) install.packages("lawstat")
+if (!requireNamespace("exactRankTests", quietly = TRUE)) install.packages("exactRankTests")
+
+library(lawstat)
+library(exactRankTests)
+```
+
+# Exercício 1 (Conover, Cap. 3, Ex. 1)
+
+**Objetivo:** Avaliar a eficácia de uma dieta na redução de peso corporal.
+
+- $X$: peso antes da dieta.
+- $Y$: peso depois da dieta.
+- Diferença pareada: $D = X - Y$.
+
+**Hipóteses:** $$H_0: E(D) \le 0 \quad \text{vs} \quad H_1: E(D) > 0$$ Nível de significância: $\alpha = 0{,}05$ (teste unilateral à direita).
+
+```{r}
+X <- c(174, 191, 188, 182, 201, 188)
+Y <- c(165, 186, 183, 178, 203, 181)
+D <- X - Y
+
+# Verificação de simetria
+lawstat::symmetry.test(D, option = "MGG")
+lawstat::symmetry.test(D, option = "CM")
+```
+
+Como os testes de simetria de Miao-Gel-Gastwirth ($p = 0{,}754$) e Cabilio-Masaro ($p = 0{,}770$) não rejeitam $H_0$, assumimos a simetria de $D$ e prosseguimos com o Teste de Postos com Sinais de Wilcoxon.
+
+```{r}
+# Cálculo manual da estatística T+
+R <- sign(D) * rank(abs(D))
+Tmais <- sum(R[R > 0])
+Tmais
+```
+
+**Decisão e Conclusão:** Pela tabela A12 ($n = 6$), o ponto crítico para cauda superior a $5\%$ é $w_{0{,}95} = 21 - 3 = 18$. Como $T^+ = 20 > 18$, rejeitamos $H_0$. Há evidências suficientes de que a dieta é eficaz na perda de peso.
+
+------------------------------------------------------------------------
+
+# Exercício 2 (Conover, Cap. 3, Ex. 2)
+
+**Objetivo:** Avaliar se o tempo de resposta após o almoço é maior do que antes da refeição.
+
+- $D = X_{\text{antes}} - Y_{\text{depois}}$.
+- Sinal positivo ($+$): tempo antes $>$ tempo depois.
+- Sinal negativo ($-$) ou sucesso de interesse: tempo após almoço maior.
+
+**Hipóteses:** $$H_0: P(+) \ge P(-) \quad \text{vs} \quad H_1: P(+) < P(-)$$ Nível de significância: $\alpha = 0{,}05$ (unilateral à esquerda).
+
+```{r}
+# Dados do problema (28 pares, 2 empates, 22 com aumento de tempo)
+Tmais <- 28 - 22 - 2  # positivos = 4
+n <- 28 - 2           # total sem empates = 26
+
+binom.test(Tmais, n, p = 0.5, alternative = "less")
+```
+
+**Decisão e Conclusão:** Como o valor-p ($0{,}00027$) é significativamente menor que $0{,}05$, rejeitamos $H_0$. O tempo de reação dos trabalhadores após o almoço é significativamente maior.
+
+------------------------------------------------------------------------
+
+# Exercício 3 (Conover, Cap. 3, Ex. 3)
+
+**Objetivo:** Verificar se existe diferença de desempenho entre dois aditivos.
+
+**Hipóteses:** $$H_0: P(+) = P(-) = 0{,}5 \quad \text{vs} \quad H_1: P(+) \ne P(-)$$ Nível de significância: $\alpha = 0{,}05$ (bilateral).
+
+```{r}
+Tmais <- 77
+n <- 100
+
+binom.test(Tmais, n, p = 0.5, alternative = "two.sided")
+```
+
+**Decisão e Conclusão:** Com valor-p $= 5{,}51 \times 10^{-8} < 0{,}05$, rejeitamos $H_0$. Há diferença estatisticamente significativa no efeito entre os dois aditivos.
+
+------------------------------------------------------------------------
+
+# Exercício 4 (Conover, Cap. 3, Ex. 4)
+
+**Objetivo:** Testar se há preferência entre dois tipos de queijo.
+
+**Hipóteses:** $$H_0: P(+) = P(-) = 0{,}5 \quad \text{vs} \quad H_1: P(+) \ne P(-)$$ Nível de significância: $\alpha = 0{,}05$.
+
+```{r}
+Tmais <- 12
+n <- 22 - 3  # 3 empates desconsiderados
+
+binom.test(Tmais, n, p = 0.5, alternative = "two.sided")
+```
+
+**Decisão e Conclusão:** Como o valor-p ($0{,}3593$) é superior a $0{,}05$, não rejeitamos $H_0$. Não há evidência suficiente de preferência por nenhum dos queijos.
+
+------------------------------------------------------------------------
+
+# Exercício 5 (Conover, Cap. 3, Ex. 5)
+
+**Objetivo:** Verificar se a proporção de nascimentos entre 18h e 6h é superior à proporção diurna.
+
+**Hipóteses:** $$H_0: P(+) \le 0{,}5 \quad \text{vs} \quad H_1: P(+) > 0{,}5$$ Nível de significância: $\alpha = 0{,}05$ (unilateral à direita).
+
+```{r}
+n <- 102
+Tmais <- 16 + 17 + 12 + 15 # 60 nascimentos noturnos
+
+binom.test(Tmais, n, p = 0.5, alternative = "greater")
+```
+
+**Decisão e Conclusão:** Como o valor-p ($0{,}0459$) é menor que $0{,}05$, rejeitamos $H_0$. Há evidências de que o número de nascimentos no período noturno (18h às 6h) é maior.
+
+------------------------------------------------------------------------
+
+# Exercício 6 (Conover, Cap. 3, Ex. 6)
+
+**Objetivo:** Testar se uma dada fragrância atrai insetos.
+
+**Hipóteses:** $$H_0: P(+) \le 0{,}5 \quad \text{vs} \quad H_1: P(+) > 0{,}5$$ Nível de significância: $\alpha = 0{,}05$ (unilateral à direita).
+
+```{r}
+Tmais <- 33
+n <- 33 + 16
+
+binom.test(Tmais, n, p = 0.5, alternative = "greater")
+```
+
+**Decisão e Conclusão:** Rejeitamos $H_0$ dado que o valor-p ($0{,}01065$) é menor que $0{,}05$. Há respaldo estatístico para afirmar que a fragrância exerce atração sobre os insetos.
+
+------------------------------------------------------------------------
+
+# Exercício 7 (Conover, Cap. 5, p. 365, Ex. 1)
+
+**Objetivo:** Avaliar se o consumo de álcool interfere no tempo de reação.
+
+- $D = X_{\text{antes}} - Y_{\text{depois}}$.
+
+**Hipóteses:** $$H_0: E(D) = 0 \quad \text{vs} \quad H_1: E(D) \ne 0$$ Nível de significância: $\alpha = 0{,}05$ (bilateral).
+
+```{r}
+X <- c(0.68, 0.64, 0.68, 0.82, 0.58, 0.80, 0.72, 0.65, 0.84, 0.73,
+       0.65, 0.59, 0.78, 0.67, 0.65, 0.76, 0.61, 0.86, 0.74, 0.88)
+Y <- c(0.73, 0.62, 0.66, 0.92, 0.68, 0.87, 0.77, 0.70, 0.88, 0.79,
+       0.72, 0.60, 0.78, 0.66, 0.68, 0.77, 0.72, 0.86, 0.72, 0.97)
+
+D <- X - Y
+D <- D[abs(D) > 0]
+n <- length(D)
+
+# Testes de simetria
+lawstat::symmetry.test(D, option = "MGG")
+lawstat::symmetry.test(D, option = "CM")
+```
+
+```{r}
+# Teste de Wilcoxon
+wilcox.test(D, alternative = "two.sided")
+
+R <- sign(D) * rank(abs(D))
+Tmais <- sum(R[R > 0])
+Tmais
+```
+
+**Decisão e Conclusão:** Os testes confirmam a simetria ($p > 0{,}05$). A estatística calculada é $T^+ = 17$, caindo na região crítica tabular ($w_{0{,}025} = 41$), com valor-p $= 0{,}0030$. Rejeitamos $H_0$; o consumo de álcool afeta significativamente o tempo de resposta.
+
+------------------------------------------------------------------------
+
+# Exercício 8 (Conover, Cap. 5, p. 365, Ex. 2)
+
+**Objetivo:** Verificar se a mediana do número de itens pode ser admitida como 10.
+
+- Diferença: $D = X - 10$.
+
+**Hipóteses:** $$H_0: E(D) = 0 \quad \text{vs} \quad H_1: E(D) \ne 0$$ Nível de significância: $\alpha = 0{,}05$.
+
+```{r}
+X <- c(22, 9, 4, 5, 1, 16, 15, 26, 47, 8, 31, 1)
+D <- X - 10
+D <- D[D != 0]
+
+lawstat::symmetry.test(D, option = "MGG")
+lawstat::symmetry.test(D, option = "CM")
+
+wilcox.test(D)
+
+R <- sign(D) * rank(abs(D))
+Tmais <- sum(R[R > 0])
+Tmais
+```
+
+**Decisão e Conclusão:** Simetria confirmada ($p > 0{,}05$). Com $T^+ = 51$ situando-se dentro do intervalo crítico $[14, 64]$ e valor-p $= 0{,}3664 > 0{,}05$, não rejeitamos $H_0$. É plausível considerar a mediana igual a 10.
+
+------------------------------------------------------------------------
+
+# Exercício 9 (Conover, Cap. 5, p. 365, Ex. 4)
+
+**Objetivo:** Testar se o cansaço pós-treino intensivo reduz o número de gols marcados.
+
+- $D = X_{\text{antes}} - Y_{\text{depois}}$.
+
+**Hipóteses:** $$H_0: E(D) \le 0 \quad \text{vs} \quad H_1: E(D) > 0$$ Nível de significância: $\alpha = 0{,}05$ (unilateral à direita).
+
+```{r}
+X <- c(18, 12, 7, 21, 19, 14, 8, 11, 19, 16, 8, 11)
+Y <- c(16, 10, 8, 23, 13, 10, 8, 13, 9, 8, 8, 5)
+
+D <- X - Y
+D <- D[D != 0]
+
+lawstat::symmetry.test(D, option = "MGG")
+lawstat::symmetry.test(D, option = "CM")
+
+wilcox.test(D, alternative = "greater")
+
+R <- sign(D) * rank(abs(D))
+Tmais <- sum(R[R > 0])
+Tmais
+```
+
+**Decisão e Conclusão:** Simetria atendida ($p > 0{,}05$). Como a estatística $T^+ = 47$ excede o valor crítico $w_{0{,}95} = 44$ e o valor-p $= 0{,}02555 < 0{,}05$, rejeitamos $H_0$. A produção de gols cai significativamente após o treino intensivo.
+
+------------------------------------------------------------------------
+
+# Exercício 10 (Sprent & Smeeton, Cap. 5, Ex. 1)
+
+**Objetivo:** Investigar se uma nova droga altera os níveis de pressão arterial.
+
+**Hipóteses:** $$H_0: E(D) = 0 \quad \text{vs} \quad H_1: E(D) \ne 0$$ Nível de significância: $\alpha = 0{,}05$.
+
+```{r}
+D <- c(7, 5, 12, -3, -5, 2, 14, 18, 19, 21, -1)
+
+lawstat::symmetry.test(D, option = "MGG")
+lawstat::symmetry.test(D, option = "CM")
+
+wilcox.test(D, alternative = "two.sided")
+
+R <- sign(D) * rank(abs(D))
+Tmais <- sum(R[R > 0])
+Tmais
+```
+
+**Decisão e Conclusão:** Simetria verificada ($p > 0{,}05$). Como $T^+ = 57{,}5 > 44$ (limite superior da tabela A12) e o valor-p $= 0{,}03277 < 0{,}05$, rejeitamos $H_0$. A medicação produz alteração significativa na pressão.
+
+------------------------------------------------------------------------
+
+# Exercício 11 (Sprent & Smeeton, Cap. 5, Ex. 2)
+
+**Objetivo:** Avaliar a concordância na contagem bacteriana entre dois laboratórios.
+
+**Hipóteses:** $$H_0: E(D) = 0 \quad \text{vs} \quad H_1: E(D) \ne 0$$ Nível de significância: $\alpha = 0{,}05$.
+
+```{r}
+X <- c(11.7, 12.1, 13.3, 15.1, 15.9, 15.3, 11.9, 16.2, 15.1, 13.6)
+Y <- c(10.9, 11.9, 13.4, 15.4, 14.8, 14.8, 12.3, 15.0, 14.2, 13.1)
+
+D <- X - Y
+D <- D[D != 0]
+
+lawstat::symmetry.test(D, option = "MGG")
+lawstat::symmetry.test(D, option = "CM")
+
+# Teste de Wilcoxon
+wilcox.test(D, alternative = "two.sided")
+
+# Teste de Aleatorização (Permutação Exata)
+exactRankTests::perm.test(X, Y, paired = TRUE, alternative = "two.sided")
+```
+
+**Decisão e Conclusão:** A simetria é satisfeita. O teste de Wilcoxon com correção de continuidade apresenta valor-p $= 0{,}05263$ (não rejeita $H_0$ a $5\%$). O teste de aleatorização exato confirma essa decisão de forma mais conservadora, com valor-p $= 0{,}1836$. Conclui-se que não há evidências suficientes de discrepância sistemática entre os laboratórios.
+
+------------------------------------------------------------------------
+
+# Exercício 12 (Sprent & Smeeton, Cap. 5, Ex. 4)
+
+**Objetivo:** Avaliar se os psicólogos apontam maior compreensão dos problemas infantis por parte dos pais em relação às mães.
+
+**Hipóteses:** $$H_0: P(+) \le 0{,}5 \quad \text{vs} \quad H_1: P(+) > 0{,}5$$ Nível de significância: $\alpha = 0{,}05$ (unilateral à direita).
+
+```{r}
+Tmais <- 13
+n <- 17
+
+binom.test(Tmais, n, p = 0.5, alternative = "greater")
+```
+
+**Decisão e Conclusão:** Como o valor-p ($0{,}02452$) é inferior a $0{,}05$, rejeitamos $H_0$. Há indícios amostrais de que, na percepção avaliada, os pais entendem melhor os problemas das crianças.
+
+------------------------------------------------------------------------
+
+# Exercício 13 (Sprent & Smeeton, Cap. 5, Ex. 6)
+
+**Objetivo:** Verificar se uma intervenção audiovisual/discussão alterou significativamente a posição dos participantes.
+
+**Hipóteses:** $$H_0: P(\text{A favor} \to \text{Contra}) = P(\text{Contra} \to \text{A favor}) \quad \text{vs} \quad H_1: P(\text{A favor} \to \text{Contra}) \ne P(\text{Contra} \to \text{A favor})$$ Nível de significância: $\alpha = 0{,}05$.
+
+```{r}
+Performance <- matrix(c(41, 16, 27, 58),
+                      nrow = 2,
+                      dimnames = list("Depois" = c("A favor", "Contra"),
+                                      "Antes"  = c("A favor", "Contra")))
+Performance
+
+# Teste de McNemar
+mcnemar.test(Performance)
+
+# Teste Binomial sobre os pares discordantes
+n_discordantes <- 27 + 16
+binom.test(27, n_discordantes, p = 0.5)
+```
+
+**Decisão e Conclusão:** Com valores-p superiores a $0{,}05$ (McNemar: $p = 0{,}1273$; Binomial exato: $p = 0{,}1263$), não rejeitamos $H_0$. O vídeo e a discussão não produziram alteração estatisticamente significativa de posicionamento.
+
+------------------------------------------------------------------------
+
+# Exercício 14 (Sprent & Smeeton, Cap. 5, Ex. 12)
+
+**Objetivo:** Avaliar a existência de diferença na perda auditiva entre duas frequências distintas.
+
+**Hipóteses:** $$H_0: E(D) = 0 \quad \text{vs} \quad H_1: E(D) \ne 0$$ Nível de significância: $\alpha = 0{,}05$ (bilateral).
+
+```{r}
+X <- c(2.5, 7.5, 11.25, 7.5, 10.0, 5.0, 7.5, 2.5, 5.0, 8.75)
+Y <- c(2.5, 5.0, 6.25,  6.25, 7.5, 3.75, 1.25, 0.0, 2.5, 5.0)
+
+D <- X - Y
+D <- D[abs(D) > 0]
+n <- length(D)
+
+# Verificação de simetria
+lawstat::symmetry.test(D, option = "MGG")
+lawstat::symmetry.test(D, option = "CM")
+
+# Teste de Wilcoxon
+wilcox.test(D, alternative = "two.sided")
+
+R <- sign(D) * rank(abs(D))
+Tmais <- sum(R[R > 0])
+Tmais
+
+# Teste de Permutação
+exactRankTests::perm.test(X, Y, paired = TRUE)
+```
+
+**Decisão e Conclusão:** A distribuição das diferenças é simétrica ($p > 0{,}80$). A estatística $T^+ = 40{,}5$ supera o limiar crítico bilateral $w_{0{,}975} = 39$ ($p = 0{,}0363$). O teste de permutação corrobora o resultado com valor-p $= 0{,}04297$. Ambos rejeitam a hipótese nula a $5\%$, apontando diferença significativa de perda auditiva entre as duas frequências.

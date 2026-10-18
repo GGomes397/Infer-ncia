@@ -1,0 +1,75 @@
+---
+title: "Boostrap"
+format: html
+editor: visual
+---
+
+Vamos repetir o método do bootstrap mas agora pra um caso onde nós precisamos sortear o nosso indices não nossa amostra porque sorteando os nosso indíces nós garantimos que nós estamos pegando sempre uma correlação coerente com a nossa base de dados ,
+
+```{r}
+library(bootstrap)
+data(law,package='bootstrap')
+n <- 10000
+```
+
+```{r}
+fun <- function(){
+  
+  indx <- sample(1:nrow(law),replace = T)
+  reamostra <- law[indx,]
+  with(reamostra,cor(LSAT,GPA))
+}
+r.vet <- replicate(n,fun())
+gm <- 0.95#dando a confiança
+alpha <- 1-gm #nivel de signicância
+ic_cov <- c(quantile(r.vet,alpha/2),quantile(r.vet,1-alpha/2))
+vies <- mean(r.vet)-cor(law$LSAT,law$GPA)
+variancia <-var(r.vet) 
+```
+
+### Analise de Resultados
+
+```{r}
+#| echo: false
+#| warning: false
+cat("--Covariância--\nN:",n,"\nViés:",vies,"\nVariância:",variancia,"\nIc com ",(100*gm),"% de confiança:\n")
+ic_cov
+```
+
+## Populações Independentes
+
+```{r}
+data(mtcars)
+autom <- mtcars[,1][mtcars[,9]==0]
+n2 <- length(autom)
+manual <- mtcars[,1][mtcars[,9]==1]
+n3 <- length(manual)
+reamostra <- function(amos1,amos2,t1,t2,t3){
+ 
+  md <- numeric(t1)
+  
+  
+  for(i in 1:t1){
+    a1 <- sample(x=amos1,size = t2,replace = T)
+    a2 <- sample(x=amos2,size = t3,replace = T)
+    md[i]<- quantile(a1,0.5)-quantile(a2,0.5)
+    
+  }
+  
+  return(md)
+  
+  
+}
+mediana <-reamostra(autom,manual,n,n2,n3)
+ic_md <- c(quantile(mediana,alpha/2),quantile(mediana,1-alpha/2))
+vies_md <- mean(mediana)-(median(autom) - median(manual))
+
+```
+
+```{r}
+#| echo: false
+#| warning: false
+cat("--Mediana--\nN:",n,"\nViés:",vies_md,"\nVariância:",var(mediana),"\nIc com ",(100*gm),"% de confiança:\n")
+ic_md
+
+```
